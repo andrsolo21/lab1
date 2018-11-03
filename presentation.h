@@ -16,7 +16,7 @@ private:
 	float _r;
 	float _coord[2];
 	QString _name;
-	bool checkGabarits(float dots1[][2]) ;
+	//bool checkGabarits(float dots1[][2]) ;
 	
 };
 

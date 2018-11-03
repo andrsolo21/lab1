@@ -54,14 +54,14 @@ float Presentation::getCoord(int i) const {
 	return _coord[i % 2];
 }
 
-bool Presentation::checkGabarits(float dots1[][2]) {
+/*bool Presentation::checkGabarits(float dots1[][2]) {
 	for (int j = 0; j < 4; j++) {
 		float rr = sqrt(pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
 		if (rr > _r)
 			return false;
 	}
 	return true;
-}
+}*/
 
 Presentation::~Presentation()
 {
