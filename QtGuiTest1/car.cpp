@@ -14,7 +14,7 @@ Car::Car()
 	_coord[1] = 0;
 	_initCar = false;
 }
-Car::Car(string nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
+Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
 	if (nameAdd != "")
 		_name = nameAdd;
 	else {
@@ -59,7 +59,7 @@ Car::Car(const Car &car) {
 	_coord[1] = car._coord[1];
 	calculate();
 }
-void Car::setName(string nameAdd) {
+void Car::setName(QString nameAdd) {
 	if (nameAdd != "")
 		_name = nameAdd;
 }
@@ -79,7 +79,7 @@ void Car::setSize(float sizeAdd[]) {
 		_size[1] = sizeAdd[1];
 	}
 }
-string Car::getName() const {
+QString Car::getName() const {
 	return _name;
 }
 float Car::getAngle() const {

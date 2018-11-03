@@ -1,84 +1,66 @@
-#include "MotorShow.h"
+#include "stend.h"
 #include <fstream> 
-//#include <string>
-#include <cstdio>
-MotorShow::MotorShow()
+#include <string>
+#include <QString>
+#include <iostream>
+
+Stend::Stend()
 {
 	_head = NULL;
 	_tail = NULL;
-	_gabarits[0] = 10;
-	_gabarits[1] = 10;
+	_name = "noName";
+	_r = 4;
+	_coord[0] = 5;
+	_coord[1] = 5;
 	_grr = 0;
 }
 
-MotorShow::MotorShow(Car * addData[], int addCount, float addGabarits[]) {
+Stend::Stend(float rAdd, QString nameAdd, Car carAdd[], int n) {
+	_grr = 0;
 	_head = NULL;
 	_tail = NULL;
-	_grr = 0;
-	if (addGabarits[0] > 0 && addGabarits[1] > 0) {
-		_gabarits[0] = addGabarits[0];
-		_gabarits[1] = addGabarits[1];
-	}
-
-	grow10(addCount);
-	for (int i = 0; i < addCount; i++) {
- 		addElement(*addData[i]);
+	if (rAdd > 0)
+		_r = rAdd;
+	else
+		_r = 4;
+	if (nameAdd != "")
+		_name = nameAdd;
+	else
+		_name = "noName";
+	for (int i = 0; i < n; i++) {
+		addElement(carAdd[i]);
 	}
 }
 
-MotorShow::MotorShow(const MotorShow & addData) {
+Stend::Stend(const Stend & addData) {
+	_grr = 0;
 	_head = NULL;
 	_tail = NULL;
-	_gabarits[0] = addData.getGabarits(0);
-	_gabarits[1] = addData.getGabarits(1);
-	grow10(addData.getCount());
+	_r = addData.getR();
+	_name = addData.getName();;
+
 	for (int i = 0; i < addData.getCount(); i++) {
 		addElement(addData[i]);
 	}
 }
 
-MotorShow::MotorShow(std::string name) {
-	_head = NULL;
-	_tail = NULL;
-	int n;
-	ifstream file(name);
-	if (file.is_open())
-	{
-		file >> n;
-		grow10(n);
-		file >> _gabarits[0];
-		file >> _gabarits[1];
-		std::string s;
-		float size[2], coord[2], angle;
-		Car * tempCar;
-		for (file >> s; !file.eof(); file >> s) {
-			file >> size[0] >> size[1] >> angle >> coord[0] >> coord[1];
-			tempCar = new Car(QString::fromStdString(s), angle, size, coord);
-			addElement(*tempCar);
-			delete tempCar;
-		}
-		file.close();
-	}
-	
+float Stend::getR() const {
+	return _r;
 }
 
-int MotorShow::getCount() const {
+QString Stend::getName() const {
+	return _name;
+}
+
+float Stend::getCoord(int i) const {
+	return _coord[i % 2];
+}
+
+int Stend::getCount() const {
 	return (_tail - _head);
 }
 
-float MotorShow::getGabarits(int i) const {
-	return _gabarits[i % 2];
-}
-
-/*Car MotorShow::getElement(int c) const {
-	if (c < (_tail - _head) && c >= 0) {
-		return *(_head + c);
-	}
-	else
-		throw std::exception("index out of range");
-}*/
-
-Car MotorShow::operator [](int c) const
+Car Stend::operator [](int c) const
 {
 	if (c < (_tail - _head) && c >= 0) {
 		return *(_head + c);
@@ -87,7 +69,7 @@ Car MotorShow::operator [](int c) const
 		throw std::exception("index out of range");
 }
 
-void MotorShow::addElement(Car  element) {
+void Stend::addElement(Car  element) {
 	if (element.isInit() && checkCar(element)) {
 		grow10();
 		Car * tempCar = new Car(element);
@@ -97,44 +79,42 @@ void MotorShow::addElement(Car  element) {
 	}
 }
 
-void MotorShow::deleteElement(int c) {
+void Stend::deleteElement(int c) {
 	if (c < (_tail - _head) && c >= 0) {
-		for (auto i = _head + c; i < _tail-1; i++) 
+		for (auto i = _head + c; i < _tail - 1; i++)
 			*i = *(i + 1);
 		_tail--;
 	}
 }
 
-void MotorShow::deleteAll() {
+void Stend::deleteAll() {
 	_tail = _head;
 }
 
-void MotorShow::printToFile(std::string f) const {
-	ofstream fout(f, ios_base::out | ios_base::trunc);	
+/*void Stend::printToFile(std::string f) const {
+	ofstream fout(f, ios_base::out | ios_base::trunc);
 	fout << getCount() << endl;
-	fout << _gabarits[0] << ' ';
-	fout << _gabarits[1] ;
 	Car * tempCar;
 	for (auto i = _head; i < _tail; i++) {
-		fout <<endl << (i->getName()).toStdString() << endl;
-		fout << i->getSize(0) << ' ' << i->getSize(1) << ' ' << i->getAngle()<<
-			' '<< i->getCoord(0) << ' '<< i->getCoord(1);
+		fout << endl << i->getName() << endl;
+		fout << i->getSize(0) << ' ' << i->getSize(1) << ' ' << i->getAngle() <<
+			' ' << i->getCoord(0) << ' ' << i->getCoord(1);
 	}
 	fout.close();
-}
+}*/
 
-void MotorShow::grow10(int zn) {
+void Stend::grow10(int zn) {
 	if (_grr == 0 || _tail - _head >= 10 * _grr - zn) {
 		int startNum = 0;
 
 		bool first = false;
 		if (_grr == 0)
-			first = true;	
+			first = true;
 
 		if (zn % 10)
 			_grr++;
 		_grr += zn / 10;
-		
+
 		Car * add = new Car[10 * _grr];
 		if (first) {
 			_head = add;
@@ -152,10 +132,10 @@ void MotorShow::grow10(int zn) {
 	}
 }
 
-bool MotorShow::checkCar(const Car carToCheck) {
+bool Stend::checkCar(const Car carToCheck) {
 	float d;
-	bool flag1, flag2,flag = true;
-	float dots1[4][2],right,top;
+	bool flag1, flag2, flag = true;
+	float dots1[4][2], right, top;
 	for (int j = 0; j < 2; j++) {
 		dots1[0][j] = carToCheck.getA(j);
 		dots1[1][j] = carToCheck.getB(j);
@@ -163,9 +143,11 @@ bool MotorShow::checkCar(const Car carToCheck) {
 		dots1[3][j] = carToCheck.getD(j);
 	}
 	flag = checkGabarits(dots1);
-	if (!flag) 
+	if (!flag)
 		return false;
-	for (Car * i = _head; i < _tail; i++) {	
+	if (_name != carToCheck.getName())
+		return false;
+	for (Car * i = _head; i < _tail; i++) {
 		d = sqrt((i->getCoord(0) - carToCheck.getCoord(0)) * (i->getCoord(0) - carToCheck.getCoord(0)) +
 			(i->getCoord(1) - carToCheck.getCoord(1)) * (i->getCoord(1) - carToCheck.getCoord(1)));
 		if (i->getRSmall() + carToCheck.getRSmall() > d)
@@ -194,21 +176,16 @@ bool MotorShow::checkCar(const Car carToCheck) {
 	return flag;
 }
 
-bool MotorShow::checkGabarits(float dots1[][2]) {
+bool Stend::checkGabarits(float dots1[][2]) {
 	for (int j = 0; j < 4; j++) {
-		if (dots1[j][0] >= _gabarits[0])
-			return false;
-		if (dots1[j][1] >= _gabarits[1])
-			return false;
-		if (dots1[j][0] <= 0)
-			return false;
-		if (dots1[j][1] <= 0)
+		float rr = sqrt(pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
+		if (rr > _r)
 			return false;
 	}
 	return true;
 }
 
-float MotorShow::linear(float c[2], float a[2], float b[2]) {
+float Stend::linear(float c[2], float a[2], float b[2]) {
 	int mn = 1, x = 0, y = 0;
 	if (b[0] != a[0])
 		x = (c[0] - a[0]) / (b[0] - a[0]);
@@ -225,7 +202,7 @@ float MotorShow::linear(float c[2], float a[2], float b[2]) {
 	return mn * (x - y);
 }
 
-int MotorShow::countDots(float a[2], float b[2], float rec[][2]) {
+int Stend::countDots(float a[2], float b[2], float rec[][2]) {
 	int n = 0;
 	float x;
 	for (int i = 0; i < 4; i++) {
@@ -238,7 +215,7 @@ int MotorShow::countDots(float a[2], float b[2], float rec[][2]) {
 	return n;
 }
 
-bool MotorShow::dots(float dots11[][2], float dots12[][2]) {
+bool Stend::dots(float dots11[][2], float dots12[][2]) {
 	int n1, n2, m1, m2;
 	n1 = countDots(dots11[0], dots11[1], dots12);
 	n2 = countDots(dots11[3], dots11[2], dots12);
@@ -249,6 +226,6 @@ bool MotorShow::dots(float dots11[][2], float dots12[][2]) {
 	return false;
 }
 
-MotorShow::~MotorShow()
+Stend::~Stend()
 {
 }

@@ -1,34 +1,36 @@
 #pragma once
-#include "Car.h"
-//#include "presentation.h"
+#include "car.h"
 #include <fstream> 
 #include <string>
 #include <QString>
 #include <iostream>
-using namespace std;
-class MotorShow
+class Stend :
+	private Car
 {
 	
 public:
-	MotorShow();
-	MotorShow(Car * addData[], int addCount, float addGabarits[]);
-	MotorShow(const MotorShow & addData);
-	MotorShow(std::string f);
-	~MotorShow();
+	Stend();
+	Stend(float rAdd, QString nameAdd, Car carAdd[], int n);
+	Stend(const Stend & addData);
+	~Stend();
+	float getR() const;
+	QString getName() const;
+	float getCoord(int i) const;
+	int getCount() const;
 
 	void addElement(const Car element);
-	void deleteElement(int i);	
+	void deleteElement(int i);
 	void deleteAll();
-	void printToFile(std::string f) const;
+	//void printToFile(std::string f) const;
 	Car operator[](int c) const;
 
-	int getCount() const;
-	float getGabarits(int i) const;
 
-protected:
+private:
 	Car *_head, *_tail;
 	int _grr = 0;
-
+	float _r;
+	float _coord[2];
+	QString _name;
 
 	void grow10(int zn = 1);
 	bool checkCar(const Car carToCheck);
@@ -36,10 +38,4 @@ protected:
 	int countDots(float a[2], float b[2], float rec[][2]);
 	bool dots(float dots1[][2], float dots2[][2]);
 	bool checkGabarits(float dots1[][2]);
-
-private:
-	float _gabarits[2];
-	
-	
 };
-

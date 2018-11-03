@@ -1,15 +1,16 @@
 #pragma once
 #include <iostream>
 #include <cmath>   
+#include <QString>
 class Car
 {
 public:
 	Car();
-	Car(std::string nameAdd, float angleAdd,float sizeAdd[], float coordAdd[]);
+	Car(QString nameAdd, float angleAdd,float sizeAdd[], float coordAdd[]);
 	Car(const Car &car);
 	~Car();
 
-	std::string getName() const;
+	QString getName() const;
 	float getAngle() const;
 	float getSize(int i) const;
 	float getCoord(int i) const;
@@ -21,14 +22,14 @@ public:
 	float getRBig() const;
 	float getRSmall() const;
 	bool isInit() const;
-	void setName(std::string nameAdd);
+	void setName(QString nameAdd);
 	void setAngle(float angleAdd);
 	void setSize(float sizeAdd[]);
 	void setCoord(float coordAdd[]);
 
 	void calculate();
 private:
-	std::string _name;
+	QString _name;
 	float _size[2], _angle, _coord[2];
 	float _A[2], _B[2], _C[2], _D[2], _O[2],_R,_r,_dots[4][2];
 	bool _initCar = true;

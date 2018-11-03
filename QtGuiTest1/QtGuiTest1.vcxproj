@@ -117,8 +117,8 @@
     <ClCompile Include="field.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MotorShow.cpp" />
-    <ClCompile Include="presentation.cpp" />
     <ClCompile Include="qtguitest1.cpp" />
+    <ClCompile Include="stend.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qtguitest1.h" />
@@ -136,7 +136,7 @@
     <ClInclude Include="car.h" />
     <ClInclude Include="field.h" />
     <ClInclude Include="MotorShow.h" />
-    <ClInclude Include="presentation.h" />
+    <ClInclude Include="stend.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
