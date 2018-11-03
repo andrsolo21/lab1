@@ -36,7 +36,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 
 	float w = width() / 4 * 3 - ots * 2;
 	float h = height() - ots * 3;
-	QPointF center, center2;
+	QPointF center, center2, center3;
 	if (_gabarits[1] == 0) {
 		fon << QPointF(ots, ots * 2);
 		fon << QPointF(ots + w, ots * 2);
@@ -66,6 +66,31 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	
 	painter.drawPolygon(fon);
 
+
+	painter.setBrush(QBrush(Qt::blue));
+	painter.setPen(QPen(Qt::black));
+	if (_motors != NULL) {
+		for (int i = 0; i < _motors->getCountP(); i++) {
+
+			center2 = QPointF((_motors->getPres(i)).getCoord(0) * _otn + center.x() - gabs[0] / 2,
+				(_motors->getPres(i)).getCoord(1)* _otn + center.y() - gabs[1] / 2);
+
+			painter.drawEllipse(center2, (_motors->getPres(i)).getR() * _otn, (_motors->getPres(i)).getR() * _otn);
+
+			painter.setBrush(QBrush(Qt::green));
+			for (int j = 0; j < (_motors->getPres(i)).getCount(); j++) {
+
+				center3 = QPointF((_motors->getPres(i))[j].getCoord(0) * _otn + center2.x(),
+					(_motors->getPres(i))[j].getCoord(1)* _otn + center2.y());
+
+				polygon = rectMy((_motors->getPres(i))[j].getSize(0) * _otn, (_motors->getPres(i))[j].getSize(1) * _otn,
+					center3, (_motors->getPres(i))[j].getAngle());
+				painter.drawPolygon(polygon);
+			}
+		}		
+	}
+
+
 	painter.setBrush(QBrush(Qt::yellow));
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
@@ -82,7 +107,8 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 
 	//painter.setBrush(QBrush(Qt::black));
 	//painter.setPen(QPen(Qt::black));
-	//painter.drawEllipse(rect);
+	
+	
 
 }
 
@@ -90,6 +116,8 @@ void QtGuiTest1::readObjects(std::string s) {
 	_motors = new Field(s);
 	_gabarits[0] = _motors->getGabarits(0);
 	_gabarits[1] = _motors->getGabarits(1);
+	_motors->addPres("file2.txt");
+	QString ss  = (_motors->getPres(0))[1].getName();
 }
 
 QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {
@@ -113,8 +141,6 @@ QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {
 	}
 	return polygon;
 }
-
-
 
 bool fileIsExist(std::string filePath)
 {

@@ -1,9 +1,5 @@
 #include "pres.h"
 
-
-
-
-
 Pres::Pres()
 {
 	_head = NULL;
@@ -37,6 +33,8 @@ Pres::Pres(const Pres & addData) {
 	_head = NULL;
 	_tail = NULL;
 	_r = addData.getR();
+	_coord[0] = addData.getCoord(0);
+	_coord[1] = addData.getCoord(1);
 	_name = addData.getName();;
 
 	for (int i = 0; i < addData.getCount(); i++) {
@@ -56,6 +54,7 @@ Pres::Pres(std::string name) {
 		file >> n;
 		grow10(n);
 		file >> _r;
+		file >> _coord[0] >> _coord[1];
 		std::string s;
 		float size[2], coord[2], angle;
 		Car * tempCar;
@@ -67,7 +66,6 @@ Pres::Pres(std::string name) {
 		}
 		file.close();
 	}
-
 }
 
 float Pres::getR() const {

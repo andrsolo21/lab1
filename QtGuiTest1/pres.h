@@ -1,7 +1,7 @@
 #pragma once
 #include "MotorShow.h"
 class Pres :
-	protected MotorShow
+	public MotorShow
 
 {
 public:
