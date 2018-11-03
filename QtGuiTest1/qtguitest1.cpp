@@ -87,7 +87,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 }
 
 void QtGuiTest1::readObjects(std::string s) {
-	_motors = new MotorShow(s);
+	_motors = new Field(s);
 	_gabarits[0] = _motors->getGabarits(0);
 	_gabarits[1] = _motors->getGabarits(1);
 }
@@ -113,6 +113,8 @@ QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {
 	}
 	return polygon;
 }
+
+
 
 bool fileIsExist(std::string filePath)
 {

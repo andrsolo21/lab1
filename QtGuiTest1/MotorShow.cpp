@@ -6,9 +6,10 @@ MotorShow::MotorShow()
 {
 	_head = NULL;
 	_tail = NULL;
+	_grr = 0;
 	_gabarits[0] = 10;
 	_gabarits[1] = 10;
-	_grr = 0;
+	
 }
 
 MotorShow::MotorShow(Car * addData[], int addCount, float addGabarits[]) {
@@ -26,9 +27,14 @@ MotorShow::MotorShow(Car * addData[], int addCount, float addGabarits[]) {
 	}
 }
 
+float MotorShow::getGabarits(int i) const {
+	return _gabarits[i % 2];
+}
+
 MotorShow::MotorShow(const MotorShow & addData) {
 	_head = NULL;
 	_tail = NULL;
+	_grr = 0;
 	_gabarits[0] = addData.getGabarits(0);
 	_gabarits[1] = addData.getGabarits(1);
 	grow10(addData.getCount());
@@ -40,6 +46,9 @@ MotorShow::MotorShow(const MotorShow & addData) {
 MotorShow::MotorShow(std::string name) {
 	_head = NULL;
 	_tail = NULL;
+	_grr = 0;
+
+	
 	int n;
 	ifstream file(name);
 	if (file.is_open())
@@ -62,26 +71,6 @@ MotorShow::MotorShow(std::string name) {
 	
 }
 
-QString MotorShow::getType() const {
-	return _type;
-}
-
-int MotorShow::getCount() const {
-	return (_tail - _head);
-}
-
-float MotorShow::getGabarits(int i) const {
-	return _gabarits[i % 2];
-}
-
-/*Car MotorShow::getElement(int c) const {
-	if (c < (_tail - _head) && c >= 0) {
-		return *(_head + c);
-	}
-	else
-		throw std::exception("index out of range");
-}*/
-
 Car MotorShow::operator [](int c) const
 {
 	if (c < (_tail - _head) && c >= 0) {
@@ -89,6 +78,10 @@ Car MotorShow::operator [](int c) const
 	}
 	else
 		throw std::exception("index out of range");
+}
+
+int MotorShow::getCount() const {
+	return (_tail - _head);
 }
 
 void MotorShow::addElement(Car  element) {
@@ -111,11 +104,17 @@ void MotorShow::deleteElement(int c) {
 
 void MotorShow::deleteAll() {
 	_tail = _head;
+	delete[] _head;
+}
+
+void MotorShow::deleteAllElements() {
+	_tail = _head;
+	delete[] _head;
 }
 
 void MotorShow::printToFile(std::string f) const {
 	ofstream fout(f, ios_base::out | ios_base::trunc);	
-	fout << getCount() << endl;
+	fout << (_tail-_head) << endl;
 	fout << _gabarits[0] << ' ';
 	fout << _gabarits[1] ;
 	Car * tempCar;
@@ -150,6 +149,7 @@ void MotorShow::grow10(int zn) {
 				*(add + i) = *(_head + i);
 				delete (_head + i);
 			}
+			delete[] _head;
 			_head = add;
 			_tail = add + count;
 		}
@@ -195,6 +195,8 @@ bool MotorShow::checkCar(const Car carToCheck) {
 			}
 		}
 	}
+
+
 	return flag;
 }
 

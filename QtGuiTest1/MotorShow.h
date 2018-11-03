@@ -1,7 +1,5 @@
 #pragma once
 #include "Car.h"
-//#include "presentation.h"
-//#include "presentation.h"
 #include <fstream> 
 #include <string>
 #include <QString>
@@ -17,31 +15,31 @@ public:
 	MotorShow(const MotorShow & addData);
 	MotorShow(std::string f);
 	~MotorShow();
-
+	void deleteAll();
+	
+	int getCount() const;
 	void addElement(const Car element);
 	void deleteElement(int i);	
-	void deleteAll();
 	void printToFile(std::string f) const;
 	Car operator[](int c) const;
-	QString getType() const;
-	int getCount() const;
 	float getGabarits(int i) const;
+	void deleteAllElements();
+
+
+	
 
 protected:
 	Car *_head, *_tail;
 	int _grr = 0;
 
-
 	void grow10(int zn = 1);
-	bool checkCar(const Car carToCheck);
+	bool checkCar(const Car carToCheck);	
+
 	float linear(float x[2], float a[2], float b[2]);
 	int countDots(float a[2], float b[2], float rec[][2]);
 	bool dots(float dots1[][2], float dots2[][2]);
 	bool checkGabarits(float dots1[][2]);
-	
-private:
 	float _gabarits[2];
-	QString _type = "MotorShow";
-	
+
 };
 

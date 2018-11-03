@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <math.h>
 #include "MotorShow.h"
+#include "field.h"
 # define M_PI           3.14159265358979323846
 
 class QtGuiTest1 : public QMainWindow
@@ -17,6 +18,7 @@ public:
 	QtGuiTest1(QWidget *parent = Q_NULLPTR);
 	void paintEvent(QPaintEvent *event);
 	void readObjects(std::string s);
+	
 	/*
 signals:
 	void signalFromButton();
@@ -33,7 +35,7 @@ private:
 	Ui::QtGuiTest1Class ui;
 	int _gabarits[2] = { 0,0};
 	float _otn = 1;
-	MotorShow *_motors = NULL;
+	Field *_motors = NULL;
 	QLineEdit * lines;
 	QPushButton * butt;
 	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);

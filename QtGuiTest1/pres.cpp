@@ -13,7 +13,7 @@ Pres::Pres()
 	_coord[0] = 5;
 	_coord[1] = 5;
 	_grr = 0;
-}
+	}
 
 Pres::Pres(float rAdd, QString nameAdd, Car carAdd[], int n) {
 	_grr = 0;
@@ -44,6 +44,32 @@ Pres::Pres(const Pres & addData) {
 	}
 }
 
+Pres::Pres(std::string name) {
+	_head = NULL;
+	_tail = NULL;
+	_grr = 0;
+
+	int n;
+	ifstream file(name);
+	if (file.is_open())
+	{
+		file >> n;
+		grow10(n);
+		file >> _r;
+		std::string s;
+		float size[2], coord[2], angle;
+		Car * tempCar;
+		for (file >> s; !file.eof(); file >> s) {
+			file >> size[0] >> size[1] >> angle >> coord[0] >> coord[1];
+			tempCar = new Car(QString::fromStdString(s), angle, size, coord);
+			addElement(*tempCar);
+			delete tempCar;
+		}
+		file.close();
+	}
+
+}
+
 float Pres::getR() const {
 	return _r;
 }
@@ -64,6 +90,7 @@ bool Pres::checkGabarits(float dots1[][2]) {
 	}
 	return true;
 }
+
 
 Pres::~Pres()
 {

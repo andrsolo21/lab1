@@ -1,13 +1,34 @@
 #pragma once
-#include <qwidget.h>
 #include "MotorShow.h"
-class field :
-	public QWidget
+#include "pres.h"
+class Field :
+	public MotorShow
 {
 public:
-	field();
-	~field();
+	Field();
+	Field(Car * addData[], int addCount, float addGabarits[]);
+	Field(const Field & addData);
+	Field(std::string name);
+
+	
+	float getGabarits(int i) const;
+	Pres getPres(int c) const;
+	void addPres(std::string f);
+	void addPres(float rAdd, QString nameAdd, Car carAdd[] = {}, int n = 0);
+	void addPres(const Pres  addData);
+	int getCountP();
+	void deletePres(int i);
+	void deleteAllPres();
+
 private:
-	MotorShow V;
+
+	Pres *_headP, *_tailP;
+	int _grrP = 0;
+
+	void grow5P();
+
+	bool checkPres(Pres element);
+
+
 };
 

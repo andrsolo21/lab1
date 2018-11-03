@@ -31,6 +31,7 @@ private:
 	float _r;
 	float _coord[2];
 	QString _name;
+	
 
 	void grow10(int zn = 1);
 	bool checkCar(const Car carToCheck);

@@ -8,11 +8,13 @@ public:
 	Pres();
 	Pres(float rAdd, QString nameAdd, Car carAdd[], int n);
 	Pres(const Pres & addData);
+	Pres(std::string s);
 	~Pres();
 	float getR() const;
 	QString getName() const;
 	float getCoord(int i) const;
-
+	bool isInit() const;
+	
 private:
 	bool checkGabarits(float dots1[][2]);
 private:
