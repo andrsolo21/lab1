@@ -1,12 +1,13 @@
 #pragma once
 #include "Car.h"
-#include "presentation.h"
+//#include "presentation.h"
 //#include "presentation.h"
 #include <fstream> 
 #include <string>
 #include <QString>
 #include <iostream>
 using namespace std;
+
 class MotorShow
 {
 	
@@ -22,7 +23,7 @@ public:
 	void deleteAll();
 	void printToFile(std::string f) const;
 	Car operator[](int c) const;
-
+	QString getType() const;
 	int getCount() const;
 	float getGabarits(int i) const;
 
@@ -37,10 +38,10 @@ protected:
 	int countDots(float a[2], float b[2], float rec[][2]);
 	bool dots(float dots1[][2], float dots2[][2]);
 	bool checkGabarits(float dots1[][2]);
-
+	
 private:
 	float _gabarits[2];
-	
+	QString _type = "MotorShow";
 	
 };
 

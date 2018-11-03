@@ -117,6 +117,7 @@
     <ClCompile Include="field.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MotorShow.cpp" />
+    <ClCompile Include="pres.cpp" />
     <ClCompile Include="presentation.cpp" />
     <ClCompile Include="qtguitest1.cpp" />
     <ClCompile Include="stend.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="car.h" />
     <ClInclude Include="field.h" />
     <ClInclude Include="MotorShow.h" />
+    <ClInclude Include="pres.h" />
     <ClInclude Include="presentation.h" />
     <ClInclude Include="stend.h" />
   </ItemGroup>

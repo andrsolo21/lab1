@@ -51,6 +51,9 @@
     <ClCompile Include="presentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pres.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qtguitest1.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="presentation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

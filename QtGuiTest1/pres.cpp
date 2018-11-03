@@ -1,8 +1,10 @@
-#include "presentation.h"
+#include "pres.h"
 
 
 
-Presentation::Presentation()
+
+
+Pres::Pres()
 {
 	_head = NULL;
 	_tail = NULL;
@@ -13,7 +15,7 @@ Presentation::Presentation()
 	_grr = 0;
 }
 
-Presentation::Presentation(float rAdd, QString nameAdd, Car carAdd[],int n) {
+Pres::Pres(float rAdd, QString nameAdd, Car carAdd[], int n) {
 	_grr = 0;
 	_head = NULL;
 	_tail = NULL;
@@ -30,11 +32,11 @@ Presentation::Presentation(float rAdd, QString nameAdd, Car carAdd[],int n) {
 	}
 }
 
-Presentation::Presentation(const Presentation & addData) {
+Pres::Pres(const Pres & addData) {
 	_grr = 0;
 	_head = NULL;
 	_tail = NULL;
-	_r = addData.getR();	
+	_r = addData.getR();
 	_name = addData.getName();;
 
 	for (int i = 0; i < addData.getCount(); i++) {
@@ -42,19 +44,19 @@ Presentation::Presentation(const Presentation & addData) {
 	}
 }
 
-float Presentation::getR() const {
+float Pres::getR() const {
 	return _r;
 }
 
-QString Presentation::getName() const {
+QString Pres::getName() const {
 	return _name;
 }
 
-float Presentation::getCoord(int i) const {
+float Pres::getCoord(int i) const {
 	return _coord[i % 2];
 }
 
-bool Presentation::checkGabarits(float dots1[][2]) {
+bool Pres::checkGabarits(float dots1[][2]) {
 	for (int j = 0; j < 4; j++) {
 		float rr = sqrt(pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
 		if (rr > _r)
@@ -63,6 +65,6 @@ bool Presentation::checkGabarits(float dots1[][2]) {
 	return true;
 }
 
-Presentation::~Presentation()
+Pres::~Pres()
 {
 }

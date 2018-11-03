@@ -62,6 +62,10 @@ MotorShow::MotorShow(std::string name) {
 	
 }
 
+QString MotorShow::getType() const {
+	return _type;
+}
+
 int MotorShow::getCount() const {
 	return (_tail - _head);
 }
