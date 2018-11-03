@@ -48,6 +48,9 @@
     <ClCompile Include="stend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="presentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qtguitest1.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="presentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
