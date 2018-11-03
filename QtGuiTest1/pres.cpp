@@ -91,7 +91,6 @@ bool Pres::checkGabarits(float dots1[][2]) {
 	return true;
 }
 
-
 Pres::~Pres()
 {
 }

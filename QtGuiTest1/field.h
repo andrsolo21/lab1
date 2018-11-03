@@ -2,7 +2,7 @@
 #include "MotorShow.h"
 #include "pres.h"
 class Field :
-	public MotorShow
+	private MotorShow
 {
 public:
 	Field();
@@ -10,7 +10,6 @@ public:
 	Field(const Field & addData);
 	Field(std::string name);
 
-	
 	float getGabarits(int i) const;
 	Pres getPres(int c) const;
 	void addPres(std::string f);
@@ -19,7 +18,9 @@ public:
 	int getCountP();
 	void deletePres(int i);
 	void deleteAllPres();
+	Car operator[](int c) const;
 
+	int getCount() const;
 private:
 
 	Pres *_headP, *_tailP;

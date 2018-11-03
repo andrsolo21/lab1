@@ -13,7 +13,6 @@ public:
 	float getR() const;
 	QString getName() const;
 	float getCoord(int i) const;
-	bool isInit() const;
 	
 private:
 	bool checkGabarits(float dots1[][2]);

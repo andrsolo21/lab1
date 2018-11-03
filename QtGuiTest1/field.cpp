@@ -82,7 +82,14 @@ float Field::getGabarits(int i) const {
 	return _gabarits[i % 2];
 }
 
-
+Car Field::operator [](int c) const
+{
+	if (c < (_tail - _head) && c >= 0) {
+		return *(_head + c);
+	}
+	else
+		throw std::exception("index out of range");
+}
 
 void Field::grow5P() {
 	if (_grrP == 0 || _tailP - _headP >= 5 * _grrP - 1) {
@@ -111,6 +118,10 @@ void Field::grow5P() {
 	}
 }
 
+int Field::getCount() const {
+	return (_tail - _head);
+}
+
 Pres Field::getPres(int c) const {
 	if (c < (_tailP - _headP) && c >= 0) {
 		return *(_headP + c);
@@ -121,7 +132,7 @@ Pres Field::getPres(int c) const {
 
 void Field::addPres(std::string f) {
 	Pres element(f);
-	if (element.isInit() && checkPres(element)) {
+	if ( checkPres(element)) {
 		grow5P();
 		*(_tailP) = element;
 		_tailP = _tailP + 1;
@@ -130,7 +141,7 @@ void Field::addPres(std::string f) {
 
 void Field::addPres(float rAdd, QString nameAdd, Car carAdd[], int n) {
 	Pres element(rAdd, nameAdd, carAdd, n);
-	if (element.isInit() && checkPres(element)) {
+	if ( checkPres(element)) {
 		grow5P();
 		*(_tailP) = element;
 		_tailP = _tailP + 1;
@@ -139,7 +150,7 @@ void Field::addPres(float rAdd, QString nameAdd, Car carAdd[], int n) {
 
 void Field::addPres(const Pres addData) {
 	Pres element(addData);
-	if (element.isInit() && checkPres(element)) {
+	if ( checkPres(element)) {
 		grow5P();
 		*(_tailP) = element;
 		_tailP = _tailP + 1;
