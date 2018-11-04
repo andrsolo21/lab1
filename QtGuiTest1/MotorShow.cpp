@@ -103,12 +103,20 @@ void MotorShow::deleteElement(int c) {
 }
 
 void MotorShow::deleteAll() {
-	_tail = _head;
+	for (auto i = _head; i < _tail; i++)
+		delete i;
+	_tail = NULL;
+	_head = NULL;
+	_grr = 0;
 	delete[] _head;
 }
 
 void MotorShow::deleteAllElements() {
-	_tail = _head;
+	for (auto i = _head; i < _tail; i++)
+		delete i;
+	_tail = NULL;
+	_head = NULL;
+	_grr = 0;
 	delete[] _head;
 }
 
@@ -166,9 +174,12 @@ bool MotorShow::checkCar(const Car carToCheck) {
 		dots1[2][j] = carToCheck.getC(j);
 		dots1[3][j] = carToCheck.getD(j);
 	}
-	flag = checkGabarits(dots1);
-	if (!flag) 
+	//flag = checkGabarits(dots1);
+	if (!checkGabarits(dots1))
 		return false;
+	if (difClass() == "pres")
+		if (!checkName(carToCheck.getName()))
+			return false;
 	for (Car * i = _head; i < _tail; i++) {	
 		d = sqrt((i->getCoord(0) - carToCheck.getCoord(0)) * (i->getCoord(0) - carToCheck.getCoord(0)) +
 			(i->getCoord(1) - carToCheck.getCoord(1)) * (i->getCoord(1) - carToCheck.getCoord(1)));

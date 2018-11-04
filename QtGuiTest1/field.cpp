@@ -82,14 +82,14 @@ float Field::getGabarits(int i) const {
 	return _gabarits[i % 2];
 }
 
-Car Field::operator [](int c) const
+/*Car Field::operator [](int c) const
 {
 	if (c < (_tail - _head) && c >= 0) {
 		return *(_head + c);
 	}
 	else
 		throw std::exception("index out of range");
-}
+}*/
 
 void Field::grow5P() {
 	if (_grrP == 0 || _tailP - _headP >= 5 * _grrP - 1) {
@@ -118,8 +118,16 @@ void Field::grow5P() {
 	}
 }
 
-int Field::getCount() const {
+/*int Field::getCount() const {
 	return (_tail - _head);
+}*/
+
+bool Field::checkName(QString s1) {
+	return true;
+}
+
+QString Field::difClass() {
+	return "field";
 }
 
 Pres Field::getPres(int c) const {
@@ -174,6 +182,30 @@ bool Field::checkPres(Pres element) {
 }
 
 void Field::deleteAllPres() {
-	_tailP = _headP;
+	for (auto i = _headP; i < _tailP; i++)
+		delete i;
+	_tailP = NULL;
+	_headP = NULL;
+	_grrP = 0;
 	delete[] _headP;
+}
+
+void Field::deleteAll() {
+	for (auto i = _head; i < _tail; i++)
+		delete i;
+	_tail = NULL;
+	_head = NULL;
+	_grr = 0;
+	delete[] _head;
+	for (auto i = _headP; i < _tailP; i++)
+		delete i;
+	_tailP = NULL;
+	_headP = NULL;
+	_grrP = 0;
+	delete[] _headP;
+}
+
+Field::~Field()
+{
+	//deleteAll();
 }

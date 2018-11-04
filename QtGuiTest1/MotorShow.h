@@ -15,7 +15,7 @@ public:
 	MotorShow(const MotorShow & addData);
 	MotorShow(std::string f);
 	~MotorShow();
-	void deleteAll();
+	virtual void deleteAll();
 	
 	int getCount() const;
 	void addElement(const Car element);
@@ -24,8 +24,8 @@ public:
 	Car operator[](int c) const;
 	float getGabarits(int i) const;
 	void deleteAllElements();
-
-
+	virtual QString difClass() = 0;
+	virtual bool checkName(QString s1) = 0;
 	
 
 protected:
@@ -38,7 +38,8 @@ protected:
 	float linear(float x[2], float a[2], float b[2]);
 	int countDots(float a[2], float b[2], float rec[][2]);
 	bool dots(float dots1[][2], float dots2[][2]);
-	bool checkGabarits(float dots1[][2]);
+	virtual bool checkGabarits(float dots1[][2]);
+	
 	float _gabarits[2];
 
 };

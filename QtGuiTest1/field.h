@@ -2,10 +2,11 @@
 #include "MotorShow.h"
 #include "pres.h"
 class Field :
-	private MotorShow
+	public MotorShow
 {
 public:
 	Field();
+	~Field();
 	Field(Car * addData[], int addCount, float addGabarits[]);
 	Field(const Field & addData);
 	Field(std::string name);
@@ -18,9 +19,11 @@ public:
 	int getCountP();
 	void deletePres(int i);
 	void deleteAllPres();
-	Car operator[](int c) const;
-
-	int getCount() const;
+	void deleteAll() override;
+	//Car operator[](int c) const;
+	QString difClass() override;
+	bool checkName(QString s1) override;
+	//int getCount() const;
 private:
 
 	Pres *_headP, *_tailP;

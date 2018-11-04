@@ -13,9 +13,10 @@ public:
 	float getR() const;
 	QString getName() const;
 	float getCoord(int i) const;
-	
+	QString difClass() override;
+	bool checkName(QString s1) override;
 private:
-	bool checkGabarits(float dots1[][2]);
+	bool checkGabarits(float dots1[][2]) override;
 private:
 	float _r;
 	float _coord[2];

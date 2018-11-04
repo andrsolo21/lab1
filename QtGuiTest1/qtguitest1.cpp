@@ -21,7 +21,7 @@ void QtGuiTest1::slotBut() {
 		std::string s = (ui.lineEdit->text()).toStdString();
 		ui.lineEdit->setText("");
 		readObjects(s);
-		update();
+		//update();
 	}	
 }
  
@@ -33,7 +33,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	qreal gabs[2] = {0,0};
 	if (width() < 30 || height() < 30|| height() < 3 * ots + 1)
 		return;
-
+	
 	float w = width() / 4 * 3 - ots * 2;
 	float h = height() - ots * 3;
 	QPointF center, center2, center3;
@@ -113,11 +113,13 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 }
 
 void QtGuiTest1::readObjects(std::string s) {
+	if (_motors)
+		delete _motors;
 	_motors = new Field(s);
 	_gabarits[0] = _motors->getGabarits(0);
 	_gabarits[1] = _motors->getGabarits(1);
 	_motors->addPres("file2.txt");
-	QString ss  = (_motors->getPres(0))[1].getName();
+	QString ss  = (_motors->getPres(0))[0].getName();
 }
 
 QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {

@@ -51,11 +51,13 @@ Pres::Pres(std::string name) {
 	ifstream file(name);
 	if (file.is_open())
 	{
+		std::string s;
 		file >> n;
 		grow10(n);
 		file >> _r;
-		file >> _coord[0] >> _coord[1];
-		std::string s;
+		file >> s;
+		_name = QString::fromStdString(s);
+		file >> _coord[0] >> _coord[1];		
 		float size[2], coord[2], angle;
 		Car * tempCar;
 		for (file >> s; !file.eof(); file >> s) {
@@ -80,6 +82,17 @@ float Pres::getCoord(int i) const {
 	return _coord[i % 2];
 }
 
+QString Pres::difClass() {
+	return "pres";
+}
+
+bool Pres::checkName(QString s1) {
+	if (s1 == _name)
+		return true;
+	else
+		return false;
+}
+
 bool Pres::checkGabarits(float dots1[][2]) {
 	for (int j = 0; j < 4; j++) {
 		float rr = sqrt(pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
@@ -91,4 +104,5 @@ bool Pres::checkGabarits(float dots1[][2]) {
 
 Pres::~Pres()
 {
+	//deleteAll();
 }

@@ -10,8 +10,8 @@ Car::Car()
 	_angle = 0;
 	_size[0] = 1.5;
 	_size[1] = 3;
-	_coord[0] = 0;
-	_coord[1] = 0;
+	_coord[0] = 1;
+	_coord[1] = 1;
 	_initCar = false;
 }
 Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
@@ -35,18 +35,10 @@ Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
 		_initCar = false;
 		_size[1] = 3; 
 	}
-	if (coordAdd[0] > 0)
-		_coord[0] = coordAdd[0];
-	else {
-		_initCar = false;
-		_coord[0] = 1;
-	}
-	if (coordAdd[1] > 0)
-		_coord[1] = coordAdd[1];
-	else {
-		_initCar = false;
-		_coord[1] = 1;
-	}
+	_coord[0] = coordAdd[0];
+	
+	_coord[1] = coordAdd[1];
+	
 	if (_initCar)
 		calculate();
 }
@@ -68,10 +60,8 @@ void Car::setAngle(float angleAdd) {
 	_angle = (toAngle % 360 + 360) % 360 + angleAdd - toAngle;
 }
 void Car::setCoord(float coordAdd[]) {
-	if (_coord[0] > 0 && _coord[1] > 0) {
-		_coord[0] = coordAdd[0];
-		_coord[1] = coordAdd[1];
-	}
+	_coord[0] = coordAdd[0];
+	_coord[1] = coordAdd[1];
 }
 void Car::setSize(float sizeAdd[]) {
 	if (sizeAdd[0] > 0 && sizeAdd[1] > 0) {
