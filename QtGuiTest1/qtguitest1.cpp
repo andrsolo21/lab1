@@ -62,16 +62,17 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 		fon = rectMy(gabs[0], gabs[1],  center, alpha);
 		painter.setPen(QPen(Qt::black));
 	}
+
 	painter.setBrush(QBrush(Qt::white));
 	
 	painter.drawPolygon(fon);
 
 
-	painter.setBrush(QBrush(Qt::blue));
+	
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
 		for (int i = 0; i < _motors->getCountP(); i++) {
-
+			painter.setBrush(QBrush(Qt::blue));
 			center2 = QPointF((_motors->getPres(i)).getCoord(0) * _otn + center.x() - gabs[0] / 2,
 				(_motors->getPres(i)).getCoord(1)* _otn + center.y() - gabs[1] / 2);
 
@@ -113,7 +114,7 @@ void QtGuiTest1::readObjects(std::string s) {
 	_gabarits[0] = _motors->getGabarits(0);
 	_gabarits[1] = _motors->getGabarits(1);
 	_motors->addPres("file2.txt");
-	//_motors->addPres("file3.txt");
+	_motors->addPres("file3.txt");
 	//QString ss  = (_motors->getPres(0))[0].getName();
 }
 

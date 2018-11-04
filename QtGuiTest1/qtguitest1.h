@@ -33,7 +33,7 @@ public slots:
 
 private:
 	Ui::QtGuiTest1Class ui;
-	int _gabarits[2] = { 0,0};
+	int _gabarits[2] = { 0 ,0};
 	float _otn = 1;
 	Field *_motors = NULL;
 	QLineEdit * lines;

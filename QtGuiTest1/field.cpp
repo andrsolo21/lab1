@@ -99,8 +99,8 @@ void Field::grow5P() {
 		if (_grrP == 0)
 			first = true;
 
-
-		Pres * add = new Pres[5 * _grrP];
+		_grrP++;
+		add = new Pres[5 * _grrP];
 		if (first) {
 			_headP = add;
 			_tailP = add;
@@ -109,7 +109,7 @@ void Field::grow5P() {
 			int count = _tailP - _headP;
 			for (auto i = 0; i < _tailP - _headP; i++) {
 				*(add + i) = *(_headP + i);
-				delete (_head + i);
+				delete (_headP + i);
 			}
 			delete[] _headP;
 			_headP = add;
