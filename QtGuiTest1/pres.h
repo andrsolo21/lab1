@@ -17,11 +17,9 @@ public:
 	bool checkName(QString s1) override;
 private:
 	bool checkGabarits(float dots1[][2]) override;
-private:
 	float _r;
 	float _coord[2];
 	QString _name;
 
-	QString _type = "Pres";
 };
 

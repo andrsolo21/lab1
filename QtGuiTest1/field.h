@@ -22,17 +22,19 @@ public:
 	void deleteAll() override;
 	//Car operator[](int c) const;
 	QString difClass() override;
-	bool checkName(QString s1) override;
+	
 	//int getCount() const;
 private:
+
 
 	Pres *_headP, *_tailP;
 	int _grrP = 0;
 
 	void grow5P();
 
-	bool checkPres(Pres element);
-
-
+	bool checkPres(Pres element) ;
+	bool checkWithElipse(float dots1[][2]) override;
+	float  roLineDot(float dot1[],float dot2[], float o[], int i) ;
+	bool checkElRe(float dots1[][2], Pres Circle) ;
 };
 

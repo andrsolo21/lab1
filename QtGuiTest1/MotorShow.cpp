@@ -174,11 +174,13 @@ bool MotorShow::checkCar(const Car carToCheck) {
 		dots1[2][j] = carToCheck.getC(j);
 		dots1[3][j] = carToCheck.getD(j);
 	}
-	//flag = checkGabarits(dots1);
 	if (!checkGabarits(dots1))
 		return false;
 	if (difClass() == "pres")
 		if (!checkName(carToCheck.getName()))
+			return false;
+	if (difClass() == "field")
+		if (!checkWithElipse(dots1))
 			return false;
 	for (Car * i = _head; i < _tail; i++) {	
 		d = sqrt((i->getCoord(0) - carToCheck.getCoord(0)) * (i->getCoord(0) - carToCheck.getCoord(0)) +
@@ -206,8 +208,6 @@ bool MotorShow::checkCar(const Car carToCheck) {
 			}
 		}
 	}
-
-
 	return flag;
 }
 
@@ -240,6 +240,14 @@ float MotorShow::linear(float c[2], float a[2], float b[2]) {
 		mn = 0;
 	}
 	return mn * (x - y);
+}
+
+bool MotorShow::checkWithElipse(float dots1[][2]) {
+	return true;
+}
+
+bool MotorShow::checkName(QString s1) {
+	return true;
 }
 
 int MotorShow::countDots(float a[2], float b[2], float rec[][2]) {

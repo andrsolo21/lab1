@@ -96,11 +96,11 @@ void Field::grow5P() {
 		int startNum = 0;
 
 		bool first = false;
-		if (_grr == 0)
+		if (_grrP == 0)
 			first = true;
 
 
-		Pres * add = new Pres[5 * _grr];
+		Pres * add = new Pres[5 * _grrP];
 		if (first) {
 			_headP = add;
 			_tailP = add;
@@ -122,10 +122,6 @@ void Field::grow5P() {
 	return (_tail - _head);
 }*/
 
-bool Field::checkName(QString s1) {
-	return true;
-}
-
 QString Field::difClass() {
 	return "field";
 }
@@ -139,12 +135,14 @@ Pres Field::getPres(int c) const {
 }
 
 void Field::addPres(std::string f) {
-	Pres element(f);
-	if ( checkPres(element)) {
+	Pres * element = new Pres(f);
+	if ( checkPres(*element)) {
+
 		grow5P();
-		*(_tailP) = element;
+		*_tailP = *element;
 		_tailP = _tailP + 1;
 	}
+	delete element;
 }
 
 void Field::addPres(float rAdd, QString nameAdd, Car carAdd[], int n) {
@@ -157,10 +155,9 @@ void Field::addPres(float rAdd, QString nameAdd, Car carAdd[], int n) {
 }
 
 void Field::addPres(const Pres addData) {
-	Pres element(addData);
-	if ( checkPres(element)) {
+	if ( checkPres(addData)) {
 		grow5P();
-		*(_tailP) = element;
+		*(_tailP) = addData;
 		_tailP = _tailP + 1;
 	}
 }
@@ -169,16 +166,103 @@ int Field::getCountP() {
 	return (_tailP - _headP);
 }
 
+bool Field::checkWithElipse(float dots1[][2]) {
+	
+	for (auto i = _headP; i < _tailP; i++) {
+		if (!checkElRe(dots1, *i))
+			return false;
+	}	
+	return true;
+}
+
+bool Field::checkElRe( float dots1[][2],  Pres circle)  {
+	float center[2], rr,mass[2];
+	center[0] = circle.getCoord(0);
+	center[1] = circle.getCoord(1);
+	for (int j = 0; j < 4; j++) {
+		if (circle.getR() >=
+			sqrt(pow(dots1[j][0] - circle.getCoord(0), 2) + pow(dots1[j][1] - circle.getCoord(1), 2)))
+			return false;
+	}
+
+	for (int j = 0; j < 3; j++) {
+
+		mass[0] = roLineDot(dots1[j], dots1[j + 1], center,0);
+		mass[1] = roLineDot(dots1[j], dots1[j + 1], center, 1);
+		rr = sqrt(pow(mass[0] - circle.getCoord(0), 2) + pow(mass[1] - circle.getCoord(1), 2));
+		if (rr <= circle.getR() && (
+			(mass[0] > dots1[j][0]) && (mass[0] < dots1[j+1][0]) ||
+			(mass[0] < dots1[j][0]) && (mass[0] > dots1[j+1][0]) ||
+			(mass[1] > dots1[j][1]) && (mass[1] < dots1[j + 1][1]) ||
+			(mass[1] < dots1[j][1]) && (mass[1] > dots1[j + 1][1]) 
+			))
+			return false;
+	}
+
+	mass[0] = roLineDot(dots1[3], dots1[0], center, 0);
+	mass[1] = roLineDot(dots1[3], dots1[0], center, 1);
+	rr = sqrt(pow(mass[0] - circle.getCoord(0), 2) + pow(mass[1] - circle.getCoord(1), 2));
+	if (rr <= circle.getR() && (
+		(mass[0] > dots1[3][0]) && (mass[0] < dots1[0][0]) ||
+		(mass[0] < dots1[3][0]) && (mass[0] > dots1[0][0]) ||
+		(mass[1] > dots1[3][1]) && (mass[1] < dots1[0][1]) ||
+		(mass[1] < dots1[3][1]) && (mass[1] > dots1[0][1])
+		))
+		return false;
+	return true;
+}
+
+float  Field::roLineDot(float dot1[], float dot2[], float o[],int i)  {
+	float a, b, c,mass[2];
+	if (dot1[0] != dot2[0]) 
+		a = 1 / (dot2[0] - dot1[0]);
+	else {
+		mass[0] = dot1[0];
+		mass[1] = o[1];
+		return mass[i];
+	}
+	if (dot1[1] != dot2[1])
+		b = 1 / (dot1[1] - dot2[1]);
+	else
+	{
+		mass[1] = dot1[1];
+		mass[0] = o[0];
+		return mass[i];
+	}
+
+	c = dot1[0] / (dot2[0] - dot1[0]) - dot1[1] / (dot2[1] - dot1[1]);
+	mass[1] = (b*a*o[0] + a*a*o[1]-c*b)/(a*a + b*b);
+	mass[0] = a * (mass[1] - o[1]) / b - o[0];
+
+	return mass[i];
+}
+
+bool Field::checkPres(Pres element) {
+	for (auto i = _head; i < _tail;i++) {
+		float dots1[4][2];
+		for (int j = 0; j < 2; j++) {
+			dots1[0][j] = i->getA(j);
+			dots1[1][j] = i->getB(j);
+			dots1[2][j] = i->getC(j);
+			dots1[3][j] = i->getD(j);
+		}
+		if (!checkElRe(dots1,element))
+			return false;
+	}
+	for (auto i = _headP; i < _tailP; i++) {
+		if ((i->getR() + element.getR()) >=
+			sqrt(pow(i->getCoord(0) - element.getCoord(0), 2) + pow(i->getCoord(1) - element.getCoord(1), 2)))
+			return false;
+	}
+	return true;
+}
+
 void Field::deletePres(int c) {
 	if (c < (_tailP - _headP) && c >= 0) {
 		for (auto i = _headP + c; i < _tailP - 1; i++)
 			*i = *(i + 1);
 		_tailP--;
 	}
-}
-
-bool Field::checkPres(Pres element) {
-	return true;
 }
 
 void Field::deleteAllPres() {

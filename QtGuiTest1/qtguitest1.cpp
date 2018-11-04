@@ -21,7 +21,7 @@ void QtGuiTest1::slotBut() {
 		std::string s = (ui.lineEdit->text()).toStdString();
 		ui.lineEdit->setText("");
 		readObjects(s);
-		//update();
+		update();
 	}	
 }
  
@@ -89,8 +89,6 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 			}
 		}		
 	}
-
-
 	painter.setBrush(QBrush(Qt::yellow));
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
@@ -104,22 +102,19 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 			painter.drawPolygon(polygon);
 		}
 	}
-
 	//painter.setBrush(QBrush(Qt::black));
 	//painter.setPen(QPen(Qt::black));
-	
-	
-
 }
 
 void QtGuiTest1::readObjects(std::string s) {
-	if (_motors)
+	if (_motors != NULL)
 		delete _motors;
 	_motors = new Field(s);
 	_gabarits[0] = _motors->getGabarits(0);
 	_gabarits[1] = _motors->getGabarits(1);
 	_motors->addPres("file2.txt");
-	QString ss  = (_motors->getPres(0))[0].getName();
+	//_motors->addPres("file3.txt");
+	//QString ss  = (_motors->getPres(0))[0].getName();
 }
 
 QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {

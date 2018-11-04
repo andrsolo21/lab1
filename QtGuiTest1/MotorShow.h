@@ -25,7 +25,7 @@ public:
 	float getGabarits(int i) const;
 	void deleteAllElements();
 	virtual QString difClass() = 0;
-	virtual bool checkName(QString s1) = 0;
+	virtual bool checkName(QString s1) ;
 	
 
 protected:
@@ -39,7 +39,8 @@ protected:
 	int countDots(float a[2], float b[2], float rec[][2]);
 	bool dots(float dots1[][2], float dots2[][2]);
 	virtual bool checkGabarits(float dots1[][2]);
-	
+	virtual bool checkWithElipse(float dots1[][2]);
+
 	float _gabarits[2];
 
 };
