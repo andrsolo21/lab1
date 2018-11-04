@@ -29,7 +29,7 @@ public slots:
 	void slotBut();
 	//void emitBut();
 	//void setValue(int value);
-
+	void setCar();
 
 private:
 	Ui::QtGuiTest1Class ui;
@@ -39,7 +39,8 @@ private:
 	QLineEdit * lines;
 	QPushButton * butt;
 	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);
-
+	void comboboxAdd();
+	void setSize(qreal ots);
 
 	
 };

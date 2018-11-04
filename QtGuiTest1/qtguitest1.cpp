@@ -14,6 +14,7 @@ QtGuiTest1::QtGuiTest1(QWidget *parent)
 	
 
 	connect(ui.but, SIGNAL(clicked()), this, SLOT(slotBut()));
+	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 }
 
 void QtGuiTest1::slotBut() {
@@ -21,6 +22,7 @@ void QtGuiTest1::slotBut() {
 		std::string s = (ui.lineEdit->text()).toStdString();
 		ui.lineEdit->setText("");
 		readObjects(s);
+		comboboxAdd();
 		update();
 	}	
 }
@@ -34,6 +36,11 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	if (width() < 30 || height() < 30|| height() < 3 * ots + 1)
 		return;
 	
+	//ui.toolBox->move(width() / 4 * 3,ots * 2);
+	//ui.toolBox->(width() / 1 * 3, height() - ots * 3);
+	setSize(ots);
+	
+
 	float w = width() / 4 * 3 - ots * 2;
 	float h = height() - ots * 3;
 	QPointF center, center2, center3;
@@ -105,6 +112,50 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	}
 	//painter.setBrush(QBrush(Qt::black));
 	//painter.setPen(QPen(Qt::black));
+}
+
+void QtGuiTest1::comboboxAdd() {
+	QString s = "MotorShow";
+	ui.comboBox -> addItem(s, QVariant(-1));
+	for (int i = 0; i < _motors->getCountP(); i++) 
+		ui.comboBox->addItem((_motors->getPres(i)).getName(), QVariant(i));	
+}
+
+void QtGuiTest1::setSize(qreal ots) {
+	ui.toolBox->setGeometry(width() / 4 * 3, ots * 2,
+		width() / 4 - ots, height() - ots * 3);
+	//ui.gabXLine->resize(width() / 4 - ots, height() - ots * 3);
+	//ui.gabYLine->resize(width() / 4 - ots, height() - ots * 3);
+	//ui.angleLine->resize();
+}
+
+void QtGuiTest1::setCar() {
+	float coord[2], gabarites[2],angle1;
+	int index = ui.comboBox->currentData().toInt();
+
+	QString coordX = ui.coordXLine->text();
+	QString coordY = ui.coordYLine->text();
+	QString gabX = ui.gabXLine->text();
+	QString gabY = ui.gabYLine->text();
+	QString name = ui.nameAddLine->text();	
+	QString angle = ui.angleLine->text();
+
+	if ((coordX != "") && (coordY != "") && (gabX != "") && (gabY != "") && (name != "") && (angle != "")) {
+		coord[0] = coordX.toFloat();
+		coord[1] = coordY.toFloat();
+		gabarites[0] = gabX.toFloat();
+		gabarites[1] = gabY.toFloat();
+		angle1 = angle.toFloat();
+		Car addCar(name,angle1,gabarites,coord);
+		if (index == -1)
+		{
+			_motors->addElement(addCar);
+		}
+		else
+			_motors->getPres(0).addElement(addCar);
+
+	}
+	update();
 }
 
 void QtGuiTest1::readObjects(std::string s) {

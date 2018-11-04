@@ -3,7 +3,7 @@
 MyBestCar1
 14 8
 MyBestCar1
-1 1.5 0 1 1
+1 1 45 1 1
 MyBestCar2
 1 1 0 1 1
 MyBestCar1
