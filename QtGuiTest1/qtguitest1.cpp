@@ -14,19 +14,11 @@ QtGuiTest1::QtGuiTest1(QWidget *parent)
 	
 
 	connect(ui.but, SIGNAL(clicked()), this, SLOT(slotBut()));
-	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
+	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));	
+	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
 }
 
-void QtGuiTest1::slotBut() {
-	if (fileIsExist((ui.lineEdit->text()).toStdString())) {
-		std::string s = (ui.lineEdit->text()).toStdString();
-		ui.lineEdit->setText("");
-		readObjects(s);
-		comboboxAdd();
-		update();
-	}	
-}
- 
 void QtGuiTest1::paintEvent(QPaintEvent *event)
 {
 	QPainter painter(this);
@@ -116,6 +108,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 
 void QtGuiTest1::comboboxAdd() {
 	QString s = "MotorShow";
+	ui.comboBox->clear();
 	ui.comboBox -> addItem(s, QVariant(-1));
 	for (int i = 0; i < _motors->getCountP(); i++) 
 		ui.comboBox->addItem((_motors->getPres(i)).getName(), QVariant(i));	
@@ -123,7 +116,7 @@ void QtGuiTest1::comboboxAdd() {
 
 void QtGuiTest1::setSize(qreal ots) {
 	ui.toolBox->setGeometry(width() / 4 * 3, ots * 2,
-		width() / 4 - ots, height() - ots * 3);
+		width() / 4 - ots, height() - ots * 3 - 30);
 	//ui.gabXLine->resize(width() / 4 - ots, height() - ots * 3);
 	//ui.gabYLine->resize(width() / 4 - ots, height() - ots * 3);
 	//ui.angleLine->resize();
@@ -152,10 +145,39 @@ void QtGuiTest1::setCar() {
 			_motors->addElement(addCar);
 		}
 		else
-			_motors->getPres(0).addElement(addCar);
-
+			_motors->getPres(index).addElement(addCar);
 	}
 	update();
+}
+
+void QtGuiTest1::setPres() {
+	float coord[2], radius;
+	//int index = ui.comboBox->currentData().toInt();
+
+	QString coordX = ui.coordPresX->text();
+	QString coordY = ui.coordPresY->text();
+	QString name = ui.namePresLine->text();
+	QString rad = ui.radiusPresLine->text();
+
+	if ((coordX != "") && (coordY != "") && (name != "") && (rad != "")) {
+		coord[0] = coordX.toFloat();
+		coord[1] = coordY.toFloat();
+		radius = rad.toFloat();
+		_motors->addPres( radius,  name, coord);
+		
+	}
+	comboboxAdd();
+	update();
+}
+
+void QtGuiTest1::slotBut() {
+	if (fileIsExist((ui.lineEdit->text()).toStdString())) {
+		std::string s = (ui.lineEdit->text()).toStdString();
+		ui.lineEdit->setText("");
+		readObjects(s);
+		comboboxAdd();
+		update();
+	}
 }
 
 void QtGuiTest1::readObjects(std::string s) {
@@ -167,6 +189,11 @@ void QtGuiTest1::readObjects(std::string s) {
 	_motors->addPres("file2.txt");
 	_motors->addPres("file3.txt");
 	//QString ss  = (_motors->getPres(0))[0].getName();
+}
+
+void QtGuiTest1::comboSelectItem(int index) {
+	//if (index != -1)
+		//ui.nameAddLine->setText(_motors->getPres(index).getName());
 }
 
 QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {

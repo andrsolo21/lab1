@@ -30,7 +30,8 @@ public slots:
 	//void emitBut();
 	//void setValue(int value);
 	void setCar();
-
+	void comboSelectItem(int index);
+	void setPres();
 private:
 	Ui::QtGuiTest1Class ui;
 	int _gabarits[2] = { 0 ,0};

@@ -6,7 +6,7 @@ class Pres :
 {
 public:
 	Pres();
-	Pres(float rAdd, QString nameAdd, Car carAdd[], int n);
+	Pres(float rAdd, QString nameAdd, float _coord[], Car carAdd[], int n);
 	Pres(const Pres & addData);
 	Pres(std::string s);
 	~Pres();

@@ -145,8 +145,8 @@ void Field::addPres(std::string f) {
 	delete element;
 }
 
-void Field::addPres(float rAdd, QString nameAdd, Car carAdd[], int n) {
-	Pres element(rAdd, nameAdd, carAdd, n);
+void Field::addPres(float rAdd, QString nameAdd, float coord[], Car carAdd[], int n) {
+	Pres element(rAdd, nameAdd,coord, carAdd, n);
 	if ( checkPres(element)) {
 		grow5P();
 		*(_tailP) = element;
@@ -254,6 +254,19 @@ bool Field::checkPres(Pres element) {
 			sqrt(pow(i->getCoord(0) - element.getCoord(0), 2) + pow(i->getCoord(1) - element.getCoord(1), 2)))
 			return false;
 	}
+	if (element.getCoord(0) +element.getR() > _gabarits[0]) 
+		return false;
+
+	if (element.getCoord(1) + element.getR() > _gabarits[1])
+		return false;
+	
+	if (element.getCoord(0) - element.getR() < 0)
+		return false;
+
+	if (element.getCoord(1) - element.getR() < 0)
+		return false;
+
+	
 	return true;
 }
 

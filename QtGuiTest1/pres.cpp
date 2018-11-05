@@ -11,10 +11,12 @@ Pres::Pres()
 	_grr = 0;
 	}
 
-Pres::Pres(float rAdd, QString nameAdd, Car carAdd[], int n) {
+Pres::Pres(float rAdd, QString nameAdd, float coord[], Car carAdd[], int n) {
 	_grr = 0;
 	_head = NULL;
 	_tail = NULL;
+	_coord[0] = coord[0];
+	_coord[1] = coord[1];
 	if (rAdd > 0)
 		_r = rAdd;
 	else

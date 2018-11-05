@@ -14,7 +14,7 @@ public:
 	float getGabarits(int i) const;
 	Pres getPres(int c) const;
 	void addPres(std::string f);
-	void addPres(float rAdd, QString nameAdd, Car carAdd[] = {}, int n = 0);
+	void addPres(float rAdd, QString nameAdd, float coord[], Car carAdd[] = {}, int n = 0);
 	void addPres(const Pres  addData);
 	int getCountP();
 	void deletePres(int i);
