@@ -21,7 +21,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolBox>
@@ -39,12 +38,17 @@ public:
     QWidget *page;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
-    QRadioButton *radioButton;
+    QLabel *label_8;
     QLineEdit *lineEdit;
     QPushButton *but;
+    QPushButton *delAll;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *delAllPres;
+    QPushButton *delAllCars;
     QWidget *page_2;
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *verticalLayout_2;
+    QComboBox *whatDoCars;
     QComboBox *comboBox;
     QLabel *label_7;
     QLineEdit *nameAddLine;
@@ -58,10 +62,14 @@ public:
     QLineEdit *gabYLine;
     QLabel *label_3;
     QLineEdit *angleLine;
+    QHBoxLayout *horizontalLayout_6;
+    QPushButton *but5;
     QPushButton *but2;
     QWidget *page_3;
     QWidget *verticalLayoutWidget_3;
     QVBoxLayout *verticalLayout_3;
+    QComboBox *whatDoPres;
+    QComboBox *comboBox3;
     QLabel *label_4;
     QLineEdit *namePresLine;
     QLabel *label_5;
@@ -70,9 +78,9 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLineEdit *coordPresX;
     QLineEdit *coordPresY;
+    QHBoxLayout *horizontalLayout_5;
+    QPushButton *but4;
     QPushButton *but3;
-    QWidget *page_4;
-    QPushButton *pushButton;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QToolBar *toolBar;
@@ -82,29 +90,29 @@ public:
     {
         if (QtGuiTest1Class->objectName().isEmpty())
             QtGuiTest1Class->setObjectName(QStringLiteral("QtGuiTest1Class"));
-        QtGuiTest1Class->resize(679, 420);
+        QtGuiTest1Class->resize(679, 565);
         actionAdd = new QAction(QtGuiTest1Class);
         actionAdd->setObjectName(QStringLiteral("actionAdd"));
         centralWidget = new QWidget(QtGuiTest1Class);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         toolBox = new QToolBox(centralWidget);
         toolBox->setObjectName(QStringLiteral("toolBox"));
-        toolBox->setGeometry(QRect(420, 10, 171, 351));
+        toolBox->setGeometry(QRect(230, 10, 301, 391));
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
-        page->setGeometry(QRect(0, 0, 171, 243));
+        page->setGeometry(QRect(0, 0, 301, 310));
         verticalLayoutWidget = new QWidget(page);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(0, 10, 160, 80));
+        verticalLayoutWidget->setGeometry(QRect(0, 10, 161, 165));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        radioButton = new QRadioButton(verticalLayoutWidget);
-        radioButton->setObjectName(QStringLiteral("radioButton"));
+        label_8 = new QLabel(verticalLayoutWidget);
+        label_8->setObjectName(QStringLiteral("label_8"));
 
-        verticalLayout->addWidget(radioButton);
+        verticalLayout->addWidget(label_8);
 
         lineEdit = new QLineEdit(verticalLayoutWidget);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
@@ -116,18 +124,44 @@ public:
 
         verticalLayout->addWidget(but);
 
-        toolBox->addItem(page, QStringLiteral("Page 1"));
+        delAll = new QPushButton(verticalLayoutWidget);
+        delAll->setObjectName(QStringLiteral("delAll"));
+
+        verticalLayout->addWidget(delAll);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        delAllPres = new QPushButton(verticalLayoutWidget);
+        delAllPres->setObjectName(QStringLiteral("delAllPres"));
+
+        horizontalLayout_2->addWidget(delAllPres);
+
+        delAllCars = new QPushButton(verticalLayoutWidget);
+        delAllCars->setObjectName(QStringLiteral("delAllCars"));
+
+        horizontalLayout_2->addWidget(delAllCars);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        toolBox->addItem(page, QString::fromUtf8("\321\201\320\276\320\267\320\264\320\260\321\202\321\214 \320\277\320\276\320\273\320\265"));
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
-        page_2->setGeometry(QRect(0, 0, 171, 243));
+        page_2->setGeometry(QRect(0, 0, 301, 310));
         verticalLayoutWidget_2 = new QWidget(page_2);
         verticalLayoutWidget_2->setObjectName(QStringLiteral("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(0, 10, 160, 235));
+        verticalLayoutWidget_2->setGeometry(QRect(0, 10, 160, 269));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        whatDoCars = new QComboBox(verticalLayoutWidget_2);
+        whatDoCars->setObjectName(QStringLiteral("whatDoCars"));
+
+        verticalLayout_2->addWidget(whatDoCars);
+
         comboBox = new QComboBox(verticalLayoutWidget_2);
         comboBox->setObjectName(QStringLiteral("comboBox"));
 
@@ -195,22 +229,44 @@ public:
 
         verticalLayout_2->addWidget(angleLine);
 
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        but5 = new QPushButton(verticalLayoutWidget_2);
+        but5->setObjectName(QStringLiteral("but5"));
+
+        horizontalLayout_6->addWidget(but5);
+
         but2 = new QPushButton(verticalLayoutWidget_2);
         but2->setObjectName(QStringLiteral("but2"));
 
-        verticalLayout_2->addWidget(but2);
+        horizontalLayout_6->addWidget(but2);
 
-        toolBox->addItem(page_2, QStringLiteral("Page 2"));
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
+        toolBox->addItem(page_2, QString::fromUtf8("\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214/\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\274\320\260\321\210\320\270\320\275\321\203"));
         page_3 = new QWidget();
         page_3->setObjectName(QStringLiteral("page_3"));
+        page_3->setGeometry(QRect(0, 0, 301, 310));
         verticalLayoutWidget_3 = new QWidget(page_3);
         verticalLayoutWidget_3->setObjectName(QStringLiteral("verticalLayoutWidget_3"));
-        verticalLayoutWidget_3->setGeometry(QRect(0, 40, 160, 162));
+        verticalLayoutWidget_3->setGeometry(QRect(0, 40, 160, 216));
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget_3);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        whatDoPres = new QComboBox(verticalLayoutWidget_3);
+        whatDoPres->setObjectName(QStringLiteral("whatDoPres"));
+
+        verticalLayout_3->addWidget(whatDoPres);
+
+        comboBox3 = new QComboBox(verticalLayoutWidget_3);
+        comboBox3->setObjectName(QStringLiteral("comboBox3"));
+
+        verticalLayout_3->addWidget(comboBox3);
+
         label_4 = new QLabel(verticalLayoutWidget_3);
         label_4->setObjectName(QStringLiteral("label_4"));
 
@@ -252,25 +308,27 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_4);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        but4 = new QPushButton(verticalLayoutWidget_3);
+        but4->setObjectName(QStringLiteral("but4"));
+
+        horizontalLayout_5->addWidget(but4);
+
         but3 = new QPushButton(verticalLayoutWidget_3);
         but3->setObjectName(QStringLiteral("but3"));
 
-        verticalLayout_3->addWidget(but3);
+        horizontalLayout_5->addWidget(but3);
 
-        toolBox->addItem(page_3, QString::fromUtf8("\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260"));
-        page_4 = new QWidget();
-        page_4->setObjectName(QStringLiteral("page_4"));
-        pushButton = new QPushButton(page_4);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(40, 90, 75, 23));
-        toolBox->addItem(page_4, QString::fromUtf8("\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260"));
+
+        verticalLayout_3->addLayout(horizontalLayout_5);
+
+        toolBox->addItem(page_3, QString::fromUtf8("\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214/\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\201\321\202\320\265\320\275\320\264"));
         QtGuiTest1Class->setCentralWidget(centralWidget);
-        toolBox->raise();
-        verticalLayoutWidget_3->raise();
-        verticalLayoutWidget_2->raise();
         mainToolBar = new QToolBar(QtGuiTest1Class);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        QtGuiTest1Class->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        QtGuiTest1Class->addToolBar(Qt::RightToolBarArea, mainToolBar);
         statusBar = new QStatusBar(QtGuiTest1Class);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         QtGuiTest1Class->setStatusBar(statusBar);
@@ -279,11 +337,11 @@ public:
         QtGuiTest1Class->addToolBar(Qt::TopToolBarArea, toolBar);
         toolBar_2 = new QToolBar(QtGuiTest1Class);
         toolBar_2->setObjectName(QStringLiteral("toolBar_2"));
-        QtGuiTest1Class->addToolBar(Qt::TopToolBarArea, toolBar_2);
+        QtGuiTest1Class->addToolBar(Qt::LeftToolBarArea, toolBar_2);
 
         retranslateUi(QtGuiTest1Class);
 
-        toolBox->setCurrentIndex(0);
+        toolBox->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(QtGuiTest1Class);
@@ -293,10 +351,13 @@ public:
     {
         QtGuiTest1Class->setWindowTitle(QApplication::translate("QtGuiTest1Class", "QtGuiTest1", Q_NULLPTR));
         actionAdd->setText(QApplication::translate("QtGuiTest1Class", "add", Q_NULLPTR));
-        radioButton->setText(QApplication::translate("QtGuiTest1Class", "RadioButton", Q_NULLPTR));
-        lineEdit->setText(QString());
-        but->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
-        toolBox->setItemText(toolBox->indexOf(page), QApplication::translate("QtGuiTest1Class", "Page 1", Q_NULLPTR));
+        label_8->setText(QApplication::translate("QtGuiTest1Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", Q_NULLPTR));
+        lineEdit->setText(QApplication::translate("QtGuiTest1Class", "file.txt", Q_NULLPTR));
+        but->setText(QApplication::translate("QtGuiTest1Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214", Q_NULLPTR));
+        delAll->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265", Q_NULLPTR));
+        delAllPres->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \321\201\321\202\320\265\320\275\320\264\321\213", Q_NULLPTR));
+        delAllCars->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \320\274\320\260\321\210\320\270\320\275\321\213", Q_NULLPTR));
+        toolBox->setItemText(toolBox->indexOf(page), QApplication::translate("QtGuiTest1Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214 \320\277\320\276\320\273\320\265", Q_NULLPTR));
         label_7->setText(QApplication::translate("QtGuiTest1Class", "name", Q_NULLPTR));
         nameAddLine->setText(QApplication::translate("QtGuiTest1Class", "carrr", Q_NULLPTR));
         label->setText(QApplication::translate("QtGuiTest1Class", "Coord", Q_NULLPTR));
@@ -307,8 +368,9 @@ public:
         gabYLine->setText(QApplication::translate("QtGuiTest1Class", "1", Q_NULLPTR));
         label_3->setText(QApplication::translate("QtGuiTest1Class", "Angle", Q_NULLPTR));
         angleLine->setText(QApplication::translate("QtGuiTest1Class", "36", Q_NULLPTR));
+        but5->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
         but2->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
-        toolBox->setItemText(toolBox->indexOf(page_2), QApplication::translate("QtGuiTest1Class", "Page 2", Q_NULLPTR));
+        toolBox->setItemText(toolBox->indexOf(page_2), QApplication::translate("QtGuiTest1Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214/\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\274\320\260\321\210\320\270\320\275\321\203", Q_NULLPTR));
         label_4->setText(QApplication::translate("QtGuiTest1Class", "name", Q_NULLPTR));
         namePresLine->setText(QApplication::translate("QtGuiTest1Class", "qwerty", Q_NULLPTR));
         label_5->setText(QApplication::translate("QtGuiTest1Class", "radius", Q_NULLPTR));
@@ -316,10 +378,9 @@ public:
         label_6->setText(QApplication::translate("QtGuiTest1Class", "coord", Q_NULLPTR));
         coordPresX->setText(QApplication::translate("QtGuiTest1Class", "7", Q_NULLPTR));
         coordPresY->setText(QApplication::translate("QtGuiTest1Class", "7", Q_NULLPTR));
+        but4->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
         but3->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
-        toolBox->setItemText(toolBox->indexOf(page_3), QApplication::translate("QtGuiTest1Class", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
-        toolBox->setItemText(toolBox->indexOf(page_4), QApplication::translate("QtGuiTest1Class", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", Q_NULLPTR));
+        toolBox->setItemText(toolBox->indexOf(page_3), QApplication::translate("QtGuiTest1Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214/\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\201\321\202\320\265\320\275\320\264", Q_NULLPTR));
         toolBar->setWindowTitle(QApplication::translate("QtGuiTest1Class", "toolBar", Q_NULLPTR));
         toolBar_2->setWindowTitle(QApplication::translate("QtGuiTest1Class", "toolBar_2", Q_NULLPTR));
     } // retranslateUi

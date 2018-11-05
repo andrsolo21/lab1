@@ -30,8 +30,27 @@ public slots:
 	//void emitBut();
 	//void setValue(int value);
 	void setCar();
-	void comboSelectItem(int index);
+	void changeCar();
 	void setPres();
+	void comboSelectItem(int index);
+	void whatDoCarsSelectons(int index);
+	void iDoCars(int index);
+
+	void deleteAllElements() {
+		_motors->deleteAllElements();
+		update();
+	}
+	void deleteAllPres() {
+		_motors->deleteAllPres();
+		update();
+	}
+	void deleteAll() {
+		_motors->deleteAll();
+		update();
+	}
+	
+		
+
 private:
 	Ui::QtGuiTest1Class ui;
 	int _gabarits[2] = { 0 ,0};
@@ -40,8 +59,14 @@ private:
 	QLineEdit * lines;
 	QPushButton * butt;
 	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);
-	void comboboxAdd();
-	void setSize(qreal ots);
 
+	void comboboxAdd();
+	void comboboxChange();
+
+	void whatDoCarsBox();
+	void setSize(qreal ots);
+	void setEnabledAddCar(bool dost);
+	void setEnabledAddPres(bool dost);
+	void coonections();
 	
 };

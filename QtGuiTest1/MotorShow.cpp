@@ -80,6 +80,8 @@ Car MotorShow::operator [](int c) const
 		throw std::exception("index out of range");
 }
 
+
+
 int MotorShow::getCount() const {
 	return (_tail - _head);
 }
@@ -109,15 +111,17 @@ void MotorShow::deleteAll() {
 	_head = NULL;
 	_grr = 0;
 	delete[] _head;
+	//_tail = _head;
 }
 
 void MotorShow::deleteAllElements() {
-	for (auto i = _head; i < _tail; i++)
-		delete i;
+	//for (auto i = _head; i < _tail; i++)
+	//	delete i;
+	delete[] _head;
 	_tail = NULL;
 	_head = NULL;
 	_grr = 0;
-	delete[] _head;
+	
 }
 
 void MotorShow::printToFile(std::string f) const {

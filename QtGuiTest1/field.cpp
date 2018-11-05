@@ -279,27 +279,34 @@ void Field::deletePres(int c) {
 }
 
 void Field::deleteAllPres() {
-	for (auto i = _headP; i < _tailP; i++)
+	/*for (auto i = _headP; i < _tailP; i++)
 		delete i;
+	delete[] _headP;
 	_tailP = NULL;
 	_headP = NULL;
-	_grrP = 0;
-	delete[] _headP;
+	_grrP = 0;*/
+	_tailP = _headP;
+	
 }
 
 void Field::deleteAll() {
 	for (auto i = _head; i < _tail; i++)
 		delete i;
+	delete[] _head;
 	_tail = NULL;
 	_head = NULL;
 	_grr = 0;
-	delete[] _head;
+
+	//_tail = _head;
+	
 	for (auto i = _headP; i < _tailP; i++)
 		delete i;
+	delete[] _headP;
 	_tailP = NULL;
 	_headP = NULL;
 	_grrP = 0;
-	delete[] _headP;
+	
+	//_tailP = _headP;
 }
 
 Field::~Field()
