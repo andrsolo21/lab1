@@ -30,11 +30,11 @@ public slots:
 	//void emitBut();
 	//void setValue(int value);
 	void setCar();
-	void changeCar();
+	//void changeCar();
 	void setPres();
-	void comboSelectItem(int index);
-	void whatDoCarsSelectons(int index);
-	void iDoCars(int index);
+	//void comboSelectItem(int index);
+	//void whatDoCarsSelectons(int index);
+	//void iDoCars(int index);
 
 	void deleteAllElements() {
 		_motors->deleteAllElements();
@@ -61,12 +61,13 @@ private:
 	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);
 
 	void comboboxAdd();
-	void comboboxChange();
+	//void comboboxChange();
 
-	void whatDoCarsBox();
-	void setSize(qreal ots);
+	//void whatDoCarsBox();
+	void setSize(int ots);
 	void setEnabledAddCar(bool dost);
 	void setEnabledAddPres(bool dost);
 	void coonections();
+	bool _btns = false;
 	
 };
