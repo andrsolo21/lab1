@@ -159,7 +159,7 @@ void MotorShow::grow10(int zn) {
 			int count = _tail - _head;
 			for (auto i = 0; i < _tail - _head; i++) {
 				*(add + i) = *(_head + i);
-				delete (_head + i);
+				//delete (_head + i);
 			}
 			delete[] _head;
 			_head = add;

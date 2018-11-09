@@ -6,17 +6,10 @@ QtGuiTest1::QtGuiTest1(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	/*setEnabledAddCar(false);
-	setEnabledAddPres(false);	
-	ui.whatDoCars->setEnabled(false);
-	ui.comboBox->setEnabled(false);
-	ui.comboBox3->setEnabled(false);
-	ui.whatDoPres->setEnabled(false);
-	ui.delAllPres->setEnabled(false);
-	ui.delAllCars->setEnabled(false);
-	ui.delAll->setEnabled(false);*/
-
-	//whatDoCarsBox();
+	ui.groupCar->setVisible(false);
+	ui.groupPres->setVisible(false);
+	ui.groupField->setVisible(false);
+	ui.btnGroup->setVisible(true);
 	coonections();
 	slotBut();
 	
@@ -137,10 +130,14 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 
 void QtGuiTest1::coonections() {
 	connect(ui.but, SIGNAL(clicked()), this, SLOT(slotBut()));
-	/*
+	connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
+	connect(ui.addFieldBut, SIGNAL(clicked()), this, SLOT(doVisible1()));
+	connect(ui.addCarBut, SIGNAL(clicked()), this, SLOT(doVisible2()));
+	connect(ui.addPresBut, SIGNAL(clicked()), this, SLOT(doVisible3()));
+	
 	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
-
+	/*
 	connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
 	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
 	connect(ui.delAll, SIGNAL(clicked()), this, SLOT(deleteAll()));
@@ -175,7 +172,7 @@ void QtGuiTest1::comboboxAdd() {
 	ui.whatDoPres->addItem("Delete", QVariant(2));
 }*/
 
-void QtGuiTest1::setEnabledAddCar(bool dost) {
+/*void QtGuiTest1::setEnabledAddCar(bool dost) {
 	ui.comboBox->setEnabled(dost);
 	ui.nameAddLine->setEnabled(dost);
 	ui.coordXLine->setEnabled(dost);
@@ -185,34 +182,64 @@ void QtGuiTest1::setEnabledAddCar(bool dost) {
 	ui.angleLine->setEnabled(dost);
 	ui.but2->setEnabled(dost);
 
-}
+}*/
 
-void QtGuiTest1::setEnabledAddPres(bool dost) {
+/*void QtGuiTest1::setEnabledAddPres(bool dost) {
 	ui.namePresLine->setEnabled(dost);
 	ui.radiusPresLine->setEnabled(dost);
 	ui.coordPresX->setEnabled(dost);
 	ui.coordPresY->setEnabled(dost);
 	ui.but3->setEnabled(dost);
 	ui.but4->setEnabled(dost);
-}
+}*/
 
 void QtGuiTest1::setSize(int ots) {
 	int w = width(), h = height();
-	QRect a = { w / 4 * 3 + ots, h / 3,
-		w / 4 - 2*ots, h *2/3 };
-	ui.groupCar->setGeometry(a);
-	ui.groupField->setGeometry(a);
-	ui.groupPres->setGeometry(a);
+	int otst = 5;
+	QRect a = { w / 4 * 3 + ots, h / 3 +  ots,
+		w / 4 - 2*ots, h *2/3 };	
+	QRect b = { w / 4 * 3 + ots, ots,
+		w / 4 - 2 * ots, h  / 3 };
+
 	
+	ui.btnGroup->setGeometry(b);
+
+	ui.groupField->setGeometry(a);
 	ui.lineEdit->setFixedSize(width() / 4 - 4 * ots, 23);
 	ui.but->setFixedSize(width() / 4 - 4 * ots, 23);
 	ui.delAll->setFixedSize(width() / 4 - 4 * ots,23);
 	ui.delAllCars->setFixedSize(width() / 4 - 4 * ots, 23);
 	ui.delAllPres->setFixedSize(width() / 4 - 4 * ots, 23);
 
+	ui.groupCar->setGeometry(a);
+	ui.comboBox->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.nameAddLine->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.angleLine->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.coordXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.gabXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.but5->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.but2->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
 
-	ui.groupCar->setVisible(false);
-	ui.groupPres->setVisible(false);
+	ui.groupPres->setGeometry(a);
+	ui.comboBox3->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.namePresLine->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.radiusPresLine->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.coordPresX->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.coordPresY->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.but3->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.but4->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+
+	//ui.groupCar->setVisible(false);
+	//ui.groupPres->setVisible(false);
+	//ui.groupField->setVisible(false);
+	//ui.btnGroup->setVisible(false);
+
+	//ui.groupCar->setVisible(true);
+	//ui.groupPres->setVisible(true);
+	//ui.groupField->setVisible(true);
+	//ui.btnGroup->setVisible(true);
 
 	//ui.gabXLine->resize(width() / 4 - ots, height() - ots * 3);
 	//ui.gabYLine->resize(width() / 4 - ots, height() - ots * 3);
@@ -304,15 +331,30 @@ void QtGuiTest1::slotBut() {
 	}
 }
 
-void QtGuiTest1::readObjects(std::string s) {
+void QtGuiTest1::readObjects(std::string name) {
 	if (_motors != NULL)
 		delete _motors;
-	_motors = new Field(s);
-	setEnabledAddCar(true);
-	_gabarits[0] = _motors->getGabarits(0);
-	_gabarits[1] = _motors->getGabarits(1);
-	_motors->addPres("file2.txt");
-	_motors->addPres("file3.txt");
+	int n;
+	ifstream file(name);
+	if (file.is_open())
+	{		
+		file >> n;
+		std::string s;
+		file >> s;
+		_motors = new Field(s);
+		//setEnabledAddCar(true);
+		_gabarits[0] = _motors->getGabarits(0);
+		_gabarits[1] = _motors->getGabarits(1);
+
+		
+		for (int i = 0;i < n; i++) {
+			file >> s;
+			_motors->addPres(s);
+		}
+		file.close();
+	}
+
+	
 
 	//setEnabledAddCar(true);
 	//setEnabledAddPres(true);
@@ -325,13 +367,55 @@ void QtGuiTest1::readObjects(std::string s) {
 	ui.delAll->setEnabled(true);*/
 }
 
-/*void QtGuiTest1::comboSelectItem(int index) {
-	index = index - 1;
-	if (index != -1)
-		ui.nameAddLine->setText(_motors->getPres(index).getName());
-	else
-		ui.nameAddLine->clear();
-}*/
+void QtGuiTest1::reduce() {
+	if (_btns)
+	{
+		_btns = false;
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+		ui.btnGroup->setVisible(false);
+	}
+	else {
+
+		ui.btnGroup->setVisible(true);
+		_btns = true;
+	}
+	update();
+}
+
+void QtGuiTest1::doVisible1() {
+
+	if (ui.groupField->isVisible() == true)
+		ui.groupField->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(true);
+	}
+}
+
+void QtGuiTest1::doVisible2() {
+
+	if (ui.groupCar->isVisible() == true)
+		ui.groupCar->setVisible(false);
+	else {
+		ui.groupCar->setVisible(true);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+	}
+}
+
+void QtGuiTest1::doVisible3() {
+
+	if (ui.groupPres->isVisible() == true)
+		ui.groupPres->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(true);
+		ui.groupField->setVisible(false);
+	}
+}
 
 /*void QtGuiTest1::iDoCars(int index) {
 	if (ui.whatDoCars->currentIndex() == 0) {

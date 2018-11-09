@@ -21,6 +21,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -53,17 +54,20 @@ public:
     QGroupBox *groupField;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
-    QLabel *label_8;
+    QRadioButton *radioButton_2;
+    QHBoxLayout *horizontalLayout_7;
+    QLineEdit *lineEdit_2;
+    QRadioButton *radioButton;
     QLineEdit *lineEdit;
     QPushButton *but;
-    QPushButton *delAll;
     QPushButton *delAllCars;
+    QPushButton *delAll;
     QPushButton *delAllPres;
     QGroupBox *groupPres;
     QWidget *verticalLayoutWidget_3;
     QVBoxLayout *verticalLayout_3;
-    QComboBox *comboBox3;
     QLabel *label_4;
+    QComboBox *comboBox3;
     QLineEdit *namePresLine;
     QLabel *label_5;
     QLineEdit *radiusPresLine;
@@ -74,7 +78,19 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QPushButton *but4;
     QPushButton *but3;
-    QPushButton *pushButton;
+    QGroupBox *btnGroup;
+    QWidget *verticalLayoutWidget_4;
+    QVBoxLayout *verticalLayout_4;
+    QPushButton *addFieldBut;
+    QLabel *label_9;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *addCarBut;
+    QPushButton *pushButton_2;
+    QLabel *label_10;
+    QHBoxLayout *horizontalLayout_8;
+    QPushButton *addPresBut;
+    QPushButton *pushButton_4;
+    QPushButton *reduceBut;
 
     void setupUi(QMainWindow *QtGuiTest1Class)
     {
@@ -87,14 +103,15 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupCar = new QGroupBox(centralWidget);
         groupCar->setObjectName(QStringLiteral("groupCar"));
-        groupCar->setGeometry(QRect(30, 40, 181, 341));
+        groupCar->setGeometry(QRect(50, 20, 181, 341));
         verticalLayoutWidget_2 = new QWidget(groupCar);
         verticalLayoutWidget_2->setObjectName(QStringLiteral("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(10, 20, 160, 269));
+        verticalLayoutWidget_2->setGeometry(QRect(10, 20, 168, 269));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setSizeConstraint(QLayout::SetNoConstraint);
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         comboBox = new QComboBox(verticalLayoutWidget_2);
         comboBox->setObjectName(QStringLiteral("comboBox"));
@@ -181,19 +198,35 @@ public:
 
         groupField = new QGroupBox(centralWidget);
         groupField->setObjectName(QStringLiteral("groupField"));
-        groupField->setGeometry(QRect(280, 100, 221, 201));
+        groupField->setGeometry(QRect(260, 50, 221, 201));
         verticalLayoutWidget = new QWidget(groupField);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 30, 211, 161));
+        verticalLayoutWidget->setGeometry(QRect(10, 20, 211, 218));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label_8 = new QLabel(verticalLayoutWidget);
-        label_8->setObjectName(QStringLiteral("label_8"));
+        radioButton_2 = new QRadioButton(verticalLayoutWidget);
+        radioButton_2->setObjectName(QStringLiteral("radioButton_2"));
 
-        verticalLayout->addWidget(label_8);
+        verticalLayout->addWidget(radioButton_2);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        lineEdit_2 = new QLineEdit(verticalLayoutWidget);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+
+        horizontalLayout_7->addWidget(lineEdit_2);
+
+
+        verticalLayout->addLayout(horizontalLayout_7);
+
+        radioButton = new QRadioButton(verticalLayoutWidget);
+        radioButton->setObjectName(QStringLiteral("radioButton"));
+
+        verticalLayout->addWidget(radioButton);
 
         lineEdit = new QLineEdit(verticalLayoutWidget);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
@@ -205,48 +238,41 @@ public:
 
         verticalLayout->addWidget(but);
 
-        delAll = new QPushButton(verticalLayoutWidget);
-        delAll->setObjectName(QStringLiteral("delAll"));
-
-        verticalLayout->addWidget(delAll);
-
         delAllCars = new QPushButton(verticalLayoutWidget);
         delAllCars->setObjectName(QStringLiteral("delAllCars"));
 
         verticalLayout->addWidget(delAllCars);
+
+        delAll = new QPushButton(verticalLayoutWidget);
+        delAll->setObjectName(QStringLiteral("delAll"));
+
+        verticalLayout->addWidget(delAll);
 
         delAllPres = new QPushButton(verticalLayoutWidget);
         delAllPres->setObjectName(QStringLiteral("delAllPres"));
 
         verticalLayout->addWidget(delAllPres);
 
-        verticalLayoutWidget->raise();
-        delAll->raise();
-        delAllPres->raise();
-        delAllCars->raise();
-        but->raise();
-        lineEdit->raise();
-        label_8->raise();
         groupPres = new QGroupBox(centralWidget);
         groupPres->setObjectName(QStringLiteral("groupPres"));
-        groupPres->setGeometry(QRect(20, 360, 201, 241));
+        groupPres->setGeometry(QRect(400, 280, 201, 241));
         verticalLayoutWidget_3 = new QWidget(groupPres);
         verticalLayoutWidget_3->setObjectName(QStringLiteral("verticalLayoutWidget_3"));
-        verticalLayoutWidget_3->setGeometry(QRect(10, 10, 160, 216));
+        verticalLayoutWidget_3->setGeometry(QRect(10, 20, 160, 216));
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget_3);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        comboBox3 = new QComboBox(verticalLayoutWidget_3);
-        comboBox3->setObjectName(QStringLiteral("comboBox3"));
-
-        verticalLayout_3->addWidget(comboBox3);
-
         label_4 = new QLabel(verticalLayoutWidget_3);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         verticalLayout_3->addWidget(label_4);
+
+        comboBox3 = new QComboBox(verticalLayoutWidget_3);
+        comboBox3->setObjectName(QStringLiteral("comboBox3"));
+
+        verticalLayout_3->addWidget(comboBox3);
 
         namePresLine = new QLineEdit(verticalLayoutWidget_3);
         namePresLine->setObjectName(QStringLiteral("namePresLine"));
@@ -300,15 +326,68 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_5);
 
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(490, 40, 75, 23));
+        btnGroup = new QGroupBox(centralWidget);
+        btnGroup->setObjectName(QStringLiteral("btnGroup"));
+        btnGroup->setGeometry(QRect(500, 40, 161, 211));
+        verticalLayoutWidget_4 = new QWidget(btnGroup);
+        verticalLayoutWidget_4->setObjectName(QStringLiteral("verticalLayoutWidget_4"));
+        verticalLayoutWidget_4->setGeometry(QRect(0, 40, 161, 141));
+        verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget_4);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        addFieldBut = new QPushButton(verticalLayoutWidget_4);
+        addFieldBut->setObjectName(QStringLiteral("addFieldBut"));
+
+        verticalLayout_4->addWidget(addFieldBut);
+
+        label_9 = new QLabel(verticalLayoutWidget_4);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        verticalLayout_4->addWidget(label_9);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        addCarBut = new QPushButton(verticalLayoutWidget_4);
+        addCarBut->setObjectName(QStringLiteral("addCarBut"));
+
+        horizontalLayout_2->addWidget(addCarBut);
+
+        pushButton_2 = new QPushButton(verticalLayoutWidget_4);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        horizontalLayout_2->addWidget(pushButton_2);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_2);
+
+        label_10 = new QLabel(verticalLayoutWidget_4);
+        label_10->setObjectName(QStringLiteral("label_10"));
+
+        verticalLayout_4->addWidget(label_10);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        addPresBut = new QPushButton(verticalLayoutWidget_4);
+        addPresBut->setObjectName(QStringLiteral("addPresBut"));
+
+        horizontalLayout_8->addWidget(addPresBut);
+
+        pushButton_4 = new QPushButton(verticalLayoutWidget_4);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+
+        horizontalLayout_8->addWidget(pushButton_4);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_8);
+
+        reduceBut = new QPushButton(centralWidget);
+        reduceBut->setObjectName(QStringLiteral("reduceBut"));
+        reduceBut->setGeometry(QRect(0, 0, 31, 16));
         QtGuiTest1Class->setCentralWidget(centralWidget);
-        groupCar->raise();
-        groupField->raise();
-        groupPres->raise();
-        pushButton->raise();
-        label_8->raise();
 
         retranslateUi(QtGuiTest1Class);
 
@@ -319,37 +398,46 @@ public:
     {
         QtGuiTest1Class->setWindowTitle(QApplication::translate("QtGuiTest1Class", "QtGuiTest1", Q_NULLPTR));
         actionAdd->setText(QApplication::translate("QtGuiTest1Class", "add", Q_NULLPTR));
-        groupCar->setTitle(QApplication::translate("QtGuiTest1Class", "GroupBox", Q_NULLPTR));
+        groupCar->setTitle(QApplication::translate("QtGuiTest1Class", "\320\234\320\260\321\210\320\270\320\275\320\260", Q_NULLPTR));
         label_7->setText(QApplication::translate("QtGuiTest1Class", "name", Q_NULLPTR));
-        nameAddLine->setText(QApplication::translate("QtGuiTest1Class", "carrr", Q_NULLPTR));
+        nameAddLine->setText(QString());
         label->setText(QApplication::translate("QtGuiTest1Class", "Coord", Q_NULLPTR));
-        coordXLine->setText(QApplication::translate("QtGuiTest1Class", "1", Q_NULLPTR));
-        coordYLine->setText(QApplication::translate("QtGuiTest1Class", "1", Q_NULLPTR));
+        coordXLine->setText(QString());
+        coordYLine->setText(QString());
         label_2->setText(QApplication::translate("QtGuiTest1Class", "Gabarites", Q_NULLPTR));
-        gabXLine->setText(QApplication::translate("QtGuiTest1Class", "1", Q_NULLPTR));
-        gabYLine->setText(QApplication::translate("QtGuiTest1Class", "1", Q_NULLPTR));
+        gabXLine->setText(QString());
+        gabYLine->setText(QString());
         label_3->setText(QApplication::translate("QtGuiTest1Class", "Angle", Q_NULLPTR));
-        angleLine->setText(QApplication::translate("QtGuiTest1Class", "36", Q_NULLPTR));
+        angleLine->setText(QString());
         but5->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
         but2->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
-        groupField->setTitle(QApplication::translate("QtGuiTest1Class", "GroupBox", Q_NULLPTR));
-        label_8->setText(QApplication::translate("QtGuiTest1Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", Q_NULLPTR));
-        lineEdit->setText(QApplication::translate("QtGuiTest1Class", "file.txt", Q_NULLPTR));
+        groupField->setTitle(QApplication::translate("QtGuiTest1Class", "\320\237\320\276\320\273\320\265", Q_NULLPTR));
+        radioButton_2->setText(QApplication::translate("QtGuiTest1Class", "RadioButton", Q_NULLPTR));
+        radioButton->setText(QApplication::translate("QtGuiTest1Class", "RadioButton", Q_NULLPTR));
+        lineEdit->setText(QApplication::translate("QtGuiTest1Class", "input.txt", Q_NULLPTR));
         but->setText(QApplication::translate("QtGuiTest1Class", "\321\201\320\276\320\267\320\264\320\260\321\202\321\214", Q_NULLPTR));
-        delAll->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265", Q_NULLPTR));
         delAllCars->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \320\274\320\260\321\210\320\270\320\275\321\213", Q_NULLPTR));
+        delAll->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265", Q_NULLPTR));
         delAllPres->setText(QApplication::translate("QtGuiTest1Class", "\321\203\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \321\201\321\202\320\265\320\275\320\264\321\213", Q_NULLPTR));
-        groupPres->setTitle(QApplication::translate("QtGuiTest1Class", "GroupBox", Q_NULLPTR));
+        groupPres->setTitle(QApplication::translate("QtGuiTest1Class", "\320\241\321\202\320\265\320\275\320\264", Q_NULLPTR));
         label_4->setText(QApplication::translate("QtGuiTest1Class", "name", Q_NULLPTR));
-        namePresLine->setText(QApplication::translate("QtGuiTest1Class", "qwerty", Q_NULLPTR));
+        namePresLine->setText(QString());
         label_5->setText(QApplication::translate("QtGuiTest1Class", "radius", Q_NULLPTR));
-        radiusPresLine->setText(QApplication::translate("QtGuiTest1Class", "1.5", Q_NULLPTR));
+        radiusPresLine->setText(QString());
         label_6->setText(QApplication::translate("QtGuiTest1Class", "coord", Q_NULLPTR));
-        coordPresX->setText(QApplication::translate("QtGuiTest1Class", "7", Q_NULLPTR));
-        coordPresY->setText(QApplication::translate("QtGuiTest1Class", "7", Q_NULLPTR));
+        coordPresX->setText(QString());
+        coordPresY->setText(QString());
         but4->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
         but3->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("QtGuiTest1Class", "PushButton", Q_NULLPTR));
+        btnGroup->setTitle(QApplication::translate("QtGuiTest1Class", "GroupBox", Q_NULLPTR));
+        addFieldBut->setText(QApplication::translate("QtGuiTest1Class", "\320\237\320\276\320\273\320\265", Q_NULLPTR));
+        label_9->setText(QApplication::translate("QtGuiTest1Class", "\320\234\320\260\321\210\320\270\320\275\320\260", Q_NULLPTR));
+        addCarBut->setText(QApplication::translate("QtGuiTest1Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("QtGuiTest1Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        label_10->setText(QApplication::translate("QtGuiTest1Class", "\320\241\321\202\320\265\320\275\320\264", Q_NULLPTR));
+        addPresBut->setText(QApplication::translate("QtGuiTest1Class", "\320\264\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_4->setText(QApplication::translate("QtGuiTest1Class", "\320\270\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        reduceBut->setText(QApplication::translate("QtGuiTest1Class", "...", Q_NULLPTR));
     } // retranslateUi
 
 };

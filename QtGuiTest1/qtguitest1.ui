@@ -17,25 +17,34 @@
    <widget class="QGroupBox" name="groupCar">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>40</y>
+      <x>50</x>
+      <y>20</y>
       <width>181</width>
       <height>341</height>
      </rect>
     </property>
     <property name="title">
-     <string>GroupBox</string>
+     <string>Машина</string>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget_2">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>160</width>
+       <width>168</width>
        <height>269</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QComboBox" name="comboBox"/>
       </item>
@@ -49,7 +58,7 @@
       <item>
        <widget class="QLineEdit" name="nameAddLine">
         <property name="text">
-         <string>carrr</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -65,14 +74,14 @@
         <item>
          <widget class="QLineEdit" name="coordXLine">
           <property name="text">
-           <string>1</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="coordYLine">
           <property name="text">
-           <string>1</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -90,14 +99,14 @@
         <item>
          <widget class="QLineEdit" name="gabXLine">
           <property name="text">
-           <string>1</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="gabYLine">
           <property name="text">
-           <string>1</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -113,7 +122,7 @@
       <item>
        <widget class="QLineEdit" name="angleLine">
         <property name="text">
-         <string>36</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -141,36 +150,50 @@
    <widget class="QGroupBox" name="groupField">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>100</y>
+      <x>260</x>
+      <y>50</y>
       <width>221</width>
       <height>201</height>
      </rect>
     </property>
     <property name="title">
-     <string>GroupBox</string>
+     <string>Поле</string>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>20</y>
        <width>211</width>
-       <height>161</height>
+       <height>218</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_8">
+       <widget class="QRadioButton" name="radioButton_2">
         <property name="text">
-         <string>создать из файла</string>
+         <string>RadioButton</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QLineEdit" name="lineEdit_2"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>RadioButton</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit">
         <property name="text">
-         <string>file.txt</string>
+         <string>input.txt</string>
         </property>
        </widget>
       </item>
@@ -182,16 +205,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="delAll">
+       <widget class="QPushButton" name="delAllCars">
         <property name="text">
-         <string>удалить все</string>
+         <string>удалить все машины</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="delAllCars">
+       <widget class="QPushButton" name="delAll">
         <property name="text">
-         <string>удалить все машины</string>
+         <string>удалить все</string>
         </property>
        </widget>
       </item>
@@ -204,39 +227,29 @@
       </item>
      </layout>
     </widget>
-    <zorder>verticalLayoutWidget</zorder>
-    <zorder>delAll</zorder>
-    <zorder>delAllPres</zorder>
-    <zorder>delAllCars</zorder>
-    <zorder>but</zorder>
-    <zorder>lineEdit</zorder>
-    <zorder>label_8</zorder>
    </widget>
    <widget class="QGroupBox" name="groupPres">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>360</y>
+      <x>400</x>
+      <y>280</y>
       <width>201</width>
       <height>241</height>
      </rect>
     </property>
     <property name="title">
-     <string>GroupBox</string>
+     <string>Стенд</string>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget_3">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>20</y>
        <width>160</width>
        <height>216</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QComboBox" name="comboBox3"/>
-      </item>
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
@@ -245,9 +258,12 @@
        </widget>
       </item>
       <item>
+       <widget class="QComboBox" name="comboBox3"/>
+      </item>
+      <item>
        <widget class="QLineEdit" name="namePresLine">
         <property name="text">
-         <string>qwerty</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -261,7 +277,7 @@
       <item>
        <widget class="QLineEdit" name="radiusPresLine">
         <property name="text">
-         <string>1.5</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -277,14 +293,14 @@
         <item>
          <widget class="QLineEdit" name="coordPresX">
           <property name="text">
-           <string>7</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="coordPresY">
           <property name="text">
-           <string>7</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -311,24 +327,101 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QGroupBox" name="btnGroup">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>500</x>
       <y>40</y>
-      <width>75</width>
-      <height>23</height>
+      <width>161</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>GroupBox</string>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>161</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QPushButton" name="addFieldBut">
+        <property name="text">
+         <string>Поле</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Машина</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="addCarBut">
+          <property name="text">
+           <string>добавить</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>изменить</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Стенд</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QPushButton" name="addPresBut">
+          <property name="text">
+           <string>добавить</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>изменить</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="reduceBut">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>31</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>...</string>
     </property>
    </widget>
-   <zorder>groupCar</zorder>
-   <zorder>groupField</zorder>
-   <zorder>groupPres</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>label_8</zorder>
   </widget>
   <action name="actionAdd">
    <property name="text">

@@ -109,7 +109,7 @@ void Field::grow5P() {
 			int count = _tailP - _headP;
 			for (auto i = 0; i < _tailP - _headP; i++) {
 				*(add + i) = *(_headP + i);
-				delete (_headP + i);
+				//delete (_headP + i);
 			}
 			delete[] _headP;
 			_headP = add;

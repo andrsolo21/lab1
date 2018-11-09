@@ -35,6 +35,7 @@ public slots:
 	//void comboSelectItem(int index);
 	//void whatDoCarsSelectons(int index);
 	//void iDoCars(int index);
+	void reduce();
 
 	void deleteAllElements() {
 		_motors->deleteAllElements();
@@ -48,6 +49,11 @@ public slots:
 		_motors->deleteAll();
 		update();
 	}
+	void doVisible1();
+	void doVisible3();
+	void doVisible2();
+
+
 	
 		
 
@@ -65,9 +71,9 @@ private:
 
 	//void whatDoCarsBox();
 	void setSize(int ots);
-	void setEnabledAddCar(bool dost);
-	void setEnabledAddPres(bool dost);
+	//void setEnabledAddCar(bool dost);
+	//void setEnabledAddPres(bool dost);
 	void coonections();
-	bool _btns = false;
+	bool _btns = true;
 	
 };
