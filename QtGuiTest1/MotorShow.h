@@ -20,7 +20,7 @@ public:
 	int getCount() const;
 	void addElement(const Car element);
 	void deleteElement(int i);	
-	void printToFile(std::string f) const;
+	
 	Car operator[](int c) const;
 	float getGabarits(int i) const;
 	void deleteAllElements();

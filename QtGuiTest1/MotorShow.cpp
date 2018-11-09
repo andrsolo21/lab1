@@ -124,19 +124,7 @@ void MotorShow::deleteAllElements() {
 	
 }
 
-void MotorShow::printToFile(std::string f) const {
-	ofstream fout(f, ios_base::out | ios_base::trunc);	
-	fout << (_tail-_head) << endl;
-	fout << _gabarits[0] << ' ';
-	fout << _gabarits[1] ;
-	Car * tempCar;
-	for (auto i = _head; i < _tail; i++) {
-		fout <<endl << (i->getName()).toStdString() << endl;
-		fout << i->getSize(0) << ' ' << i->getSize(1) << ' ' << i->getAngle()<<
-			' '<< i->getCoord(0) << ' '<< i->getCoord(1);
-	}
-	fout.close();
-}
+
 
 void MotorShow::grow10(int zn) {
 	if (_grr == 0 || _tail - _head >= 10 * _grr - zn) {

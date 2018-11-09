@@ -130,6 +130,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 
 void QtGuiTest1::coonections() {
 	connect(ui.but, SIGNAL(clicked()), this, SLOT(slotBut()));
+	connect(ui.printBtn, SIGNAL(clicked()), this, SLOT(printToFile()));
 	connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
 	connect(ui.addFieldBut, SIGNAL(clicked()), this, SLOT(doVisible1()));
 	connect(ui.addCarBut, SIGNAL(clicked()), this, SLOT(doVisible2()));
@@ -139,14 +140,14 @@ void QtGuiTest1::coonections() {
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
 
 	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
-	/*
+	
 	connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
 	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
 	connect(ui.delAll, SIGNAL(clicked()), this, SLOT(deleteAll()));
 	
 	
 	//connect(ui.comboBox, SIGNAL(activated(int)), this, SLOT(comboSelectItem(int)));
-	connect(ui.whatDoCars, SIGNAL(currentIndexChanged(int)), this, SLOT(iDoCars(int)));*/
+	//connect(ui.whatDoCars, SIGNAL(currentIndexChanged(int)), this, SLOT(iDoCars(int)));
 }
 
 void QtGuiTest1::comboboxAdd() {
@@ -156,6 +157,24 @@ void QtGuiTest1::comboboxAdd() {
 	for (
 	int i = 0; i < _motors->getCountP(); i++) 
 		ui.comboBox->addItem((_motors->getPres(i)).getName(), QVariant(i));	
+}
+
+void QtGuiTest1::printToFile() {
+	std::string name = (ui.strToFile->text()).toStdString();
+	ofstream fout(name, ios_base::out | ios_base::trunc);
+	std::string mainFile = "file.txt";
+	fout << _motors->getCountP()  + 1<< endl;
+	fout << mainFile;
+
+	for (auto i = 0; _motors->getCountP() ; i++) {
+		fout << endl << (_motors->getPres(i).getName()).toStdString();
+	}
+	fout.close();
+	_motors->printToFile(mainFile);
+	for (auto i = 0; _motors->getCountP(); i++) {
+		_motors->getPres(i).printToFile((_motors->getPres(i).getName()).toStdString());
+	}
+	
 }
 
 /*void QtGuiTest1::comboboxChange() {
@@ -349,7 +368,7 @@ void QtGuiTest1::readObjects(std::string name) {
 		_gabarits[1] = _motors->getGabarits(1);
 
 		
-		for (int i = 0;i < n; i++) {
+		for (int i = 0;i < n-1; i++) {
 			file >> s;
 			_motors->addPres(s);
 		}

@@ -36,7 +36,7 @@ public slots:
 	//void whatDoCarsSelectons(int index);
 	//void iDoCars(int index);
 	void reduce();
-
+	void printToFile();
 	void deleteAllElements() {
 		_motors->deleteAllElements();
 		update();
@@ -68,7 +68,7 @@ private:
 
 	void comboboxAdd();
 	//void comboboxChange();
-
+	
 	//void whatDoCarsBox();
 	void setSize(int ots);
 	//void setEnabledAddCar(bool dost);

@@ -78,18 +78,23 @@ Field::Field(std::string name) {
 
 }
 
+void Field::printToFile(std::string f) const {
+	ofstream fout(f, ios_base::out | ios_base::trunc);
+	fout << (_tail - _head) << endl;
+	fout << _gabarits[0] << ' ';
+	fout << _gabarits[1];
+	Car * tempCar;
+	for (auto i = _head; i < _tail; i++) {
+		fout << endl << (i->getName()).toStdString() << endl;
+		fout << i->getSize(0) << ' ' << i->getSize(1) << ' ' << i->getAngle() <<
+			' ' << i->getCoord(0) << ' ' << i->getCoord(1);
+	}
+	fout.close();
+}
+
 float Field::getGabarits(int i) const {
 	return _gabarits[i % 2];
 }
-
-/*Car Field::operator [](int c) const
-{
-	if (c < (_tail - _head) && c >= 0) {
-		return *(_head + c);
-	}
-	else
-		throw std::exception("index out of range");
-}*/
 
 void Field::grow5P() {
 	if (_grrP == 0 || _tailP - _headP >= 5 * _grrP - 1) {
@@ -117,10 +122,6 @@ void Field::grow5P() {
 		}
 	}
 }
-
-/*int Field::getCount() const {
-	return (_tail - _head);
-}*/
 
 QString Field::difClass() {
 	return "field";

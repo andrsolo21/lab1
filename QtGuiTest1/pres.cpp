@@ -72,6 +72,23 @@ Pres::Pres(std::string name) {
 	}
 }
 
+void Pres::printToFile(std::string f) const {
+	ofstream fout(f, ios_base::out | ios_base::trunc);
+	fout << (_tail - _head) << endl;
+	fout << _r << endl;
+	fout << _name.toStdString() << endl;
+
+	fout << _coord[0] << ' ';
+	fout << _coord[1] << endl;
+	Car * tempCar;
+	for (auto i = _head; i < _tail; i++) {
+		fout << endl << (i->getName()).toStdString() << endl;
+		fout << i->getSize(0) << ' ' << i->getSize(1) << ' ' << i->getAngle() <<
+			' ' << i->getCoord(0) << ' ' << i->getCoord(1);
+	}
+	fout.close();
+}
+
 float Pres::getR() const {
 	return _r;
 }

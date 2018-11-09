@@ -20,10 +20,9 @@ public:
 	void deletePres(int i);
 	void deleteAllPres();
 	void deleteAll() override;
-	//Car operator[](int c) const;
 	QString difClass() override;
+	void printToFile(std::string f) const;
 	
-	//int getCount() const;
 private:
 
 
