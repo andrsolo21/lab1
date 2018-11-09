@@ -43,12 +43,29 @@ Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
 		calculate();
 }
 Car::Car(const Car &car) {
-	_name = car._name;
+	/*_name = car._name;
 	_angle = car._angle;
 	_size[0] = car._size[0];
 	_size[1] = car._size[1];
 	_coord[0] = car._coord[0];
-	_coord[1] = car._coord[1];
+	_coord[1] = car._coord[1];*/
+
+	_name = car.getName();
+	_angle = car.getAngle();
+	_size[0] = car.getSize(0);
+	_size[1] = car.getSize(1);
+	_coord[0] = car.getCoord(0);
+	_coord[1] = car.getCoord(1);
+	calculate();
+
+}
+void Car::copyCar(const Car &car) {
+	_name = car.getName();
+	_angle = car.getAngle();
+	_size[0] = car.getSize(0);
+	_size[1] = car.getSize(1);
+	_coord[0] = car.getCoord(0);
+	_coord[1] = car.getCoord(1);
 	calculate();
 }
 void Car::setName(QString nameAdd) {

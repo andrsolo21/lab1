@@ -137,12 +137,14 @@ void QtGuiTest1::coonections() {
 	
 	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+
+	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
 	/*
 	connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
 	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
 	connect(ui.delAll, SIGNAL(clicked()), this, SLOT(deleteAll()));
 	
-	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
+	
 	//connect(ui.comboBox, SIGNAL(activated(int)), this, SLOT(comboSelectItem(int)));
 	connect(ui.whatDoCars, SIGNAL(currentIndexChanged(int)), this, SLOT(iDoCars(int)));*/
 }

@@ -10,6 +10,7 @@ public:
 	Car(const Car &car);
 	~Car();
 
+	void copyCar(const Car &car);
 	QString getName() const;
 	float getAngle() const;
 	float getSize(int i) const;
