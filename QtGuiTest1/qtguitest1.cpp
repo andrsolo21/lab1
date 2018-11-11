@@ -490,7 +490,7 @@ void QtGuiTest1::doVisible2() {
 
 void QtGuiTest1::doVisible3() {
 
-	if (ui.groupPres->isVisible() && !(ui.groupPres->isVisible()))
+	if (ui.groupPres->isVisible() && !(ui.comboPress->isVisible()))
 		ui.groupPres->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
@@ -671,6 +671,7 @@ void QtGuiTest1::iDo6(int k) {
 		ui.but8->setEnabled(false);
 	}	
 }
+
 
 void QtGuiTest1::setCar() {
 	int index = ui.comboBox->currentData().toInt();
