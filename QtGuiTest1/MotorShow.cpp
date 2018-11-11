@@ -185,7 +185,6 @@ bool MotorShow::checkCar(const Car carToCheck) {
 			}
 			else
 			{
-				flag = true;
 				float dots2[4][2];
 				for (int j = 0; j < 2; j++) {
 					dots2[0][j] = i->getA(j);

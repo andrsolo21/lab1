@@ -52,6 +52,7 @@ public slots:
 	void doVisible1();
 	void doVisible3();
 	void doVisible2();
+	void doVisible4();
 
 
 	

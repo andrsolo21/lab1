@@ -8,7 +8,8 @@ QtGuiTest1::QtGuiTest1(QWidget *parent)
 	ui.setupUi(this);
 	ui.groupCar->setVisible(false);
 	ui.groupPres->setVisible(false);
-	ui.groupField->setVisible(false);
+	ui.groupField->setVisible(false); 
+	ui.changeField->setVisible(false);
 	ui.btnGroup->setVisible(true);
 	coonections();
 	slotBut();
@@ -30,7 +31,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	QPointF center, center2, center3;
 	float w, h;
 	
-
+	//отрисовка фона
 	if (_btns) {
 		w = width() / 4 * 3 - ots * 2;
 		h = height() - ots * 2;
@@ -57,7 +58,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	}
 
 
-
+	//отрисовка поля
 	if (_gabarits[1] == 0) {
 		fon << QPointF(ots, ots );
 		fon << QPointF(ots + w, ots );
@@ -88,7 +89,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	
 	painter.drawPolygon(fon);
 
-
+	//отрсовка стенда
 	
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
@@ -111,6 +112,8 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 			}
 		}		
 	}
+
+	//отрисовка машин
 	painter.setBrush(QBrush(Qt::yellow));
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
@@ -132,9 +135,11 @@ void QtGuiTest1::coonections() {
 	connect(ui.but, SIGNAL(clicked()), this, SLOT(slotBut()));
 	connect(ui.printBtn, SIGNAL(clicked()), this, SLOT(printToFile()));
 	connect(ui.reduceBut, SIGNAL(clicked()), this, SLOT(reduce()));
+
 	connect(ui.addFieldBut, SIGNAL(clicked()), this, SLOT(doVisible1()));
 	connect(ui.addCarBut, SIGNAL(clicked()), this, SLOT(doVisible2()));
 	connect(ui.addPresBut, SIGNAL(clicked()), this, SLOT(doVisible3()));
+	connect(ui.changeFieldBut, SIGNAL(clicked()), this, SLOT(doVisible4()));
 	
 	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
@@ -231,6 +236,8 @@ void QtGuiTest1::setSize(int ots) {
 	ui.delAll->setFixedSize(width() / 4 - 4 * ots,23);
 	ui.delAllCars->setFixedSize(width() / 4 - 4 * ots, 23);
 	ui.delAllPres->setFixedSize(width() / 4 - 4 * ots, 23);
+
+	ui.changeField->setGeometry(a);
 
 	ui.groupCar->setGeometry(a);
 	ui.comboBox->setFixedSize(width() / 4 - 4 * ots, 23);
@@ -370,6 +377,7 @@ void QtGuiTest1::readObjects(std::string name) {
 		
 		for (int i = 0;i < n-1; i++) {
 			file >> s;
+			Pres * tempPres = new Pres(s);
 			_motors->addPres(s);
 		}
 		file.close();
@@ -413,6 +421,7 @@ void QtGuiTest1::doVisible1() {
 		ui.groupCar->setVisible(false);
 		ui.groupPres->setVisible(false);
 		ui.groupField->setVisible(true);
+		ui.changeField->setVisible(false);
 	}
 }
 
@@ -424,6 +433,7 @@ void QtGuiTest1::doVisible2() {
 		ui.groupCar->setVisible(true);
 		ui.groupPres->setVisible(false);
 		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
 	}
 }
 
@@ -435,6 +445,19 @@ void QtGuiTest1::doVisible3() {
 		ui.groupCar->setVisible(false);
 		ui.groupPres->setVisible(true);
 		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+	}
+}
+
+void QtGuiTest1::doVisible4() {
+
+	if (ui.changeField->isVisible() == true)
+		ui.changeField->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false); 
+		ui.changeField->setVisible(true); 
 	}
 }
 

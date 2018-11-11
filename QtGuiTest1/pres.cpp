@@ -114,8 +114,8 @@ bool Pres::checkName(QString s1) {
 
 bool Pres::checkGabarits(float dots1[][2]) {
 	for (int j = 0; j < 4; j++) {
-		float rr = sqrt(pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
-		if (rr > _r)
+		float rr = (pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
+		if (rr > pow(_r,2))
 			return false;
 	}
 	return true;
