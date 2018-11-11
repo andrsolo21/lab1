@@ -1,0 +1,6 @@
+6
+file.txt
+Cont1
+Cont2
+123
+mnvc 

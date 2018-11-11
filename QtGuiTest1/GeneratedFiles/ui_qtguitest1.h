@@ -275,6 +275,7 @@ public:
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setSizeConstraint(QLayout::SetMinAndMaxSize);
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(verticalLayoutWidget_3);
         label_4->setObjectName(QStringLiteral("label_4"));

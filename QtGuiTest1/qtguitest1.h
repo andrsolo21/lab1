@@ -56,10 +56,13 @@ public slots:
 	void doVisible5();
 	void doVisible6();
 	void iDo6(int k = 1);
+	void iDo5(int k = 1);
 	void iDo3();
+	void iDo2();
+	void changePres();
 	void cancelPres();
 	void deleteThisPres();
-		
+	void comboCar(int index);
 
 private:
 	Ui::QtGuiTest1Class ui;
@@ -71,6 +74,7 @@ private:
 	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);
 
 	Pres * getPres();
+	Car * getCar();
 	void comboboxAdd();
 	//void comboboxChange();
 	

@@ -5,6 +5,8 @@ bool fileIsExist(std::string filePath);
 QtGuiTest1::QtGuiTest1(QWidget *parent)
 	: QMainWindow(parent)
 {
+	
+
 	ui.setupUi(this);
 	ui.groupCar->setVisible(false);
 	ui.groupPres->setVisible(false);
@@ -148,7 +150,9 @@ void QtGuiTest1::coonections() {
 	connect(ui.but8, SIGNAL(clicked()), this, SLOT(deleteThisPres()));
 
 	connect(ui.comboPress, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo6(int)));
-	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
+	//connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
+	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboCar(int)));
+	connect(ui.comboBoxCar, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo5(int)));
 	
 	connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
 	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
@@ -162,8 +166,14 @@ void QtGuiTest1::coonections() {
 void QtGuiTest1::comboboxAdd() {
 	QString s = "MotorShow";
 	ui.comboPress->setEnabled(true);
-	ui.comboBox->clear();
-	
+	//ui.comboBox->clear();removeItem
+	int i = 0;
+	for (; i < _motors->getCountP(); i++) {
+		ui.comboBox->removeItem(i);
+		ui.comboPress->removeItem(i);
+	}
+	ui.comboBox->removeItem(i);
+
 	ui.comboBox -> addItem(s, QVariant(-1));
 	if (_motors->getCountP() > 0)
 		for (int i = 0; i < _motors->getCountP(); i++) {
@@ -172,6 +182,31 @@ void QtGuiTest1::comboboxAdd() {
 		}
 	else 
 		ui.comboPress->setEnabled(false);
+	
+}
+
+void QtGuiTest1::comboCar(int index) {
+	ui.comboBoxCar->clear();
+	index = index - 1;
+	//int index = ui.comboBoxCar->currentData().toInt() - 1;
+	ui.comboBoxCar->setEnabled(true);
+	if (index == -1) {
+		if (_motors->getCount() != 0)
+			for (int i = 0; i < _motors->getCount(); i++) {
+				ui.comboBoxCar->addItem(((*_motors)[i]).getName(), QVariant(i));
+			}
+		else
+			ui.comboBoxCar->setEnabled(false);
+	}
+	else {
+		if ((_motors->getPres(index)).getCount() != 0)
+			for (int i = 0; i < (_motors->getPres(index)).getCount(); i++) {
+				
+				ui.comboBoxCar->addItem(((_motors->getPres(index))[i]).getName() + QString::number(i), QVariant(i));
+			}
+		else
+			ui.comboBoxCar->setEnabled(false);
+	}
 	
 }
 
@@ -358,18 +393,6 @@ Car * QtGuiTest1::getCar() {
 	update();
 }*/
 
-void QtGuiTest1::setPres() {	
-	Pres * pres = getPres();
-	if (pres)
-	{
-		_motors->addPres(*pres);
-		delete pres;
-	}
-	comboboxAdd();
-	update();
-	
-}
-
 Pres * QtGuiTest1::getPres() {
 	float coord[2], radius;
 	bool ok1, ok2, ok3;
@@ -390,6 +413,7 @@ void QtGuiTest1::slotBut() {
 		std::string s = (ui.lineEdit->text()).toStdString();
 		ui.lineEdit->setText("");
 		readObjects(s);
+		ui.comboBox->clear();
 		comboboxAdd();
 		update();
 	}
@@ -509,6 +533,10 @@ void QtGuiTest1::doVisible5() {
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
 		ui.but7->setVisible(true);
+		ui.comboBoxCar->setVisible(true);
+		iDo5();
+		disconnect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
+		connect(ui.but2, SIGNAL(clicked()), this, SLOT(changeCar()));
 	}
 }
 
@@ -521,13 +549,37 @@ void QtGuiTest1::doVisible6() {
 		ui.groupPres->setVisible(true);		
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
+		ui.comboPress->setVisible(true);
+		ui.but8->setVisible(true);
 		iDo6();
+		ui.but3->setText(QString::fromLocal8Bit("изменить"));
+		disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+		connect(ui.but3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}
 }
 
 void QtGuiTest1::iDo2() {
 	ui.but7->setVisible(false);
+	ui.comboBoxCar->setVisible(false);
 
+	ui.nameAddLine->setEnabled(true);
+	ui.angleLine->setEnabled(true);
+	ui.coordXLine->setEnabled(true);
+	ui.gabXLine->setEnabled(true);
+	ui.coordYLine->setEnabled(true);
+	ui.gabYLine->setEnabled(true);
+	ui.but2->setEnabled(true);
+	ui.but5->setEnabled(true);
+
+	ui.nameAddLine->clear();
+	ui.angleLine->clear();
+	ui.coordXLine->clear();
+	ui.gabXLine->clear();
+	ui.coordYLine->clear();
+	ui.gabYLine->clear();
+	ui.but2->setText(QString::fromLocal8Bit("добавить"));
+	//disconnect(ui.but2, SIGNAL(clicked()), this, SLOT(changeCar()));
+	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 }
 
 void QtGuiTest1::iDo3() {
@@ -543,26 +595,68 @@ void QtGuiTest1::iDo3() {
 	ui.radiusPresLine->clear();
 	ui.coordPresX->clear();
 	ui.coordPresY->clear();
+	ui.but3->setText(QString::fromLocal8Bit("добавить"));
+	disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(changePres()));
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
 }
 
-void QtGuiTest1::iDo6(int k) {
-	ui.comboPress->setVisible(true);
-	ui.but8->setVisible(true);
+void QtGuiTest1::iDo5(int k) {
+	
+	if (ui.comboBoxCar->isEnabled()) {
+		Car *car;
+		int indexC = ui.comboBox->currentData().toInt() ;
+		int index = ui.comboBoxCar->currentData().toInt();
+		/*ui.nameAddLine->setEnabled(true);
+		ui.angleLine->setEnabled(true);
+		ui.coordXLine->setEnabled(true);
+		ui.gabXLine->setEnabled(true);
+		ui.coordYLine->setEnabled(true);
+		ui.gabYLine->setEnabled(true);
+		ui.but2->setEnabled(true);
+		ui.but5->setEnabled(true);*/
+		if (indexC == -1) 
+			car = new Car((*_motors)[index]);
+		else
+			car = new Car((_motors->getPres(indexC))[index]);
+		ui.nameAddLine->setText(car->getName());
+		ui.angleLine->setText(QString::number(car->getAngle()));
+		ui.coordXLine->setText(QString::number(car->getCoord(0)));
+		ui.gabXLine->setText(QString::number(car->getSize(0)));
+		ui.coordYLine->setText(QString::number(car->getCoord(1)));
+		ui.gabYLine->setText(QString::number(car->getSize(1)));
+	}
+	else {
+		ui.nameAddLine->clear();
+		ui.angleLine->clear();
+		ui.coordXLine->clear();
+		ui.gabXLine->clear();
+		ui.coordYLine->clear();
+		ui.gabYLine->clear();
+		ui.nameAddLine->setEnabled(false);
+		ui.angleLine->setEnabled(false);
+		ui.coordXLine->setEnabled(false);
+		ui.gabXLine->setEnabled(false);
+		ui.coordYLine->setEnabled(false);
+		ui.gabYLine->setEnabled(false);
+		ui.but2->setEnabled(false);
+		ui.but5->setEnabled(false);
+	}	
+}
+
+void QtGuiTest1::iDo6(int k) {	
 	if (ui.comboPress->isEnabled()) {
-		ui.namePresLine->setEnabled(true);
+		/*ui.namePresLine->setEnabled(true);
 		ui.radiusPresLine->setEnabled(true);
 		ui.coordPresX->setEnabled(true);
 		ui.coordPresY->setEnabled(true);
 		ui.but3->setEnabled(true);
 		ui.but4->setEnabled(true);
-		ui.but8->setEnabled(true);
+		ui.but8->setEnabled(true);*/
 		int index = ui.comboPress->currentData().toInt();
 		ui.namePresLine->setText(_motors->getPres(index).getName());
 		ui.radiusPresLine->setText(QString::number((_motors->getPres(index)).getR()));
 		ui.coordPresX->setText(QString::number((_motors->getPres(index)).getCoord(0)));
 		ui.coordPresY->setText(QString::number((_motors->getPres(index)).getCoord(1)));
-
 	}
 	else {
 		ui.namePresLine->clear();
@@ -576,8 +670,37 @@ void QtGuiTest1::iDo6(int k) {
 		ui.but3->setEnabled(false);
 		ui.but4->setEnabled(false);
 		ui.but8->setEnabled(false);
+	}	
+}
+
+void QtGuiTest1::setPres() {
+	Pres * pres = getPres();
+	if (pres)
+	{
+		_motors->addPres(*pres);
+		delete pres;
 	}
-	disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+	
+	
+	comboboxAdd();
+	update();
+	doVisible3();
+	doVisible3();
+}
+
+void QtGuiTest1::changePres() {
+	int index = ui.comboPress->currentData().toInt() , oldN = _motors->getCountP();
+	Pres * pres = getPres(), oldPres = _motors->getPres(index);
+	if (pres) {
+		_motors->deletePres(index);
+		_motors->addPres(*pres);
+		if (_motors->getCountP() != oldN) {
+			_motors->addPres(oldPres);
+		}
+		delete pres;
+	}
+	comboboxAdd();
+	update();
 }
 
 void QtGuiTest1::cancelPres() {
@@ -587,6 +710,7 @@ void QtGuiTest1::cancelPres() {
 void QtGuiTest1::deleteThisPres() {
 	int index = ui.comboPress->currentData().toInt();
 	ui.comboPress->clear();
+	//ui.comboBox->clear();
 	_motors->deletePres(index);
 	comboboxAdd();
 	update();

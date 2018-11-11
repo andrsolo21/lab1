@@ -278,6 +278,9 @@
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinAndMaxSize</enum>
+      </property>
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
