@@ -60,8 +60,11 @@ public slots:
 	void iDo3();
 	void iDo2();
 	void changePres();
+	void changeCar();
 	void cancelPres();
+	void cancelCar();
 	void deleteThisPres();
+	void deleteThisCar();
 	void comboCar(int index);
 
 private:

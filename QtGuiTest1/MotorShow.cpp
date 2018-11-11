@@ -81,7 +81,6 @@ Car MotorShow::operator [](int c) const
 }
 
 
-
 int MotorShow::getCount() const {
 	return (_tail - _head);
 }
