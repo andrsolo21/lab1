@@ -53,9 +53,12 @@ public slots:
 	void doVisible3();
 	void doVisible2();
 	void doVisible4();
-
-
-	
+	void doVisible5();
+	void doVisible6();
+	void iDo6(int k = 1);
+	void iDo3();
+	void cancelPres();
+	void deleteThisPres();
 		
 
 private:
@@ -67,13 +70,15 @@ private:
 	QPushButton * butt;
 	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);
 
+	Pres * getPres();
 	void comboboxAdd();
 	//void comboboxChange();
 	
 	//void whatDoCarsBox();
 	void setSize(int ots);
-	//void setEnabledAddCar(bool dost);
-	//void setEnabledAddPres(bool dost);
+	
+	
+
 	void coonections();
 	bool _btns = true;
 	

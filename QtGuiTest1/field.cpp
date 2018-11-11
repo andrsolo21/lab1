@@ -273,7 +273,7 @@ bool Field::checkPres(Pres element) {
 
 void Field::deletePres(int c) {
 	if (c < (_tailP - _headP) && c >= 0) {
-		for (auto i = _headP + c; i < _tailP - 1; i++)
+		for (auto i = _headP + c; i < _tailP -1; i++)
 			*i = *(i + 1);
 		_tailP--;
 	}

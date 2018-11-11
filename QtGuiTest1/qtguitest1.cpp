@@ -140,10 +140,14 @@ void QtGuiTest1::coonections() {
 	connect(ui.addCarBut, SIGNAL(clicked()), this, SLOT(doVisible2()));
 	connect(ui.addPresBut, SIGNAL(clicked()), this, SLOT(doVisible3()));
 	connect(ui.changeFieldBut, SIGNAL(clicked()), this, SLOT(doVisible4()));
+	connect(ui.changeCarBut, SIGNAL(clicked()), this, SLOT(doVisible5()));
+	connect(ui.changePressBut, SIGNAL(clicked()), this, SLOT(doVisible6()));
 	
 	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
-	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+	connect(ui.but4, SIGNAL(clicked()), this, SLOT(cancelPres()));
+	connect(ui.but8, SIGNAL(clicked()), this, SLOT(deleteThisPres()));
 
+	connect(ui.comboPress, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo6(int)));
 	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
 	
 	connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
@@ -157,11 +161,18 @@ void QtGuiTest1::coonections() {
 
 void QtGuiTest1::comboboxAdd() {
 	QString s = "MotorShow";
+	ui.comboPress->setEnabled(true);
 	ui.comboBox->clear();
+	
 	ui.comboBox -> addItem(s, QVariant(-1));
-	for (
-	int i = 0; i < _motors->getCountP(); i++) 
-		ui.comboBox->addItem((_motors->getPres(i)).getName(), QVariant(i));	
+	if (_motors->getCountP() > 0)
+		for (int i = 0; i < _motors->getCountP(); i++) {
+			ui.comboBox->addItem((_motors->getPres(i)).getName(), QVariant(i));
+			ui.comboPress->addItem((_motors->getPres(i)).getName(), QVariant(i));
+		}
+	else 
+		ui.comboPress->setEnabled(false);
+	
 }
 
 void QtGuiTest1::printToFile() {
@@ -221,43 +232,56 @@ void QtGuiTest1::printToFile() {
 
 void QtGuiTest1::setSize(int ots) {
 	int w = width(), h = height();
-	int otst = 5;
+	
 	QRect a = { w / 4 * 3 + ots, h / 3 +  ots,
 		w / 4 - 2*ots, h *2/3 };	
 	QRect b = { w / 4 * 3 + ots, ots,
 		w / 4 - 2 * ots, h  / 3 };
-
+	int hig = 23;
 	
 	ui.btnGroup->setGeometry(b);
 
 	ui.groupField->setGeometry(a);
-	ui.lineEdit->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.but->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.delAll->setFixedSize(width() / 4 - 4 * ots,23);
-	ui.delAllCars->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.delAllPres->setFixedSize(width() / 4 - 4 * ots, 23);
+	ui.lineEdit->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.but->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.delAll->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.delAllCars->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.delAllPres->setFixedSize(width() / 4 - 4 * ots, hig); 
+	ui.strToFile->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.printBtn->setFixedSize(width() / 4 - 4 * ots, hig);
+
 
 	ui.changeField->setGeometry(a);
+	ui.addFieldBut->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.changeFieldBut->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.addCarBut->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.changeCarBut->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.addPresBut->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.changePressBut->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 
 	ui.groupCar->setGeometry(a);
-	ui.comboBox->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.nameAddLine->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.angleLine->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.coordXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.gabXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.but5->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.but2->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+
+	ui.comboBox->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.comboBoxCar->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.nameAddLine->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.angleLine->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.coordXLine->setFixedSize((width() / 4 - 4 * ots) / 2  - ots/2, hig);
+	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
+	ui.gabXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
+	ui.gabYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
+	ui.but5->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.but2->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.but7->setFixedSize(width() / 4 - 4 * ots, hig);
 
 	ui.groupPres->setGeometry(a);
-	ui.comboBox3->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.namePresLine->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.radiusPresLine->setFixedSize(width() / 4 - 4 * ots, 23);
-	ui.coordPresX->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.coordPresY->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.but3->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
-	ui.but4->setFixedSize((width() / 4 - 4 * ots) / 2 - otst, 23);
+	ui.comboPress->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.namePresLine->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.radiusPresLine->setFixedSize(width() / 4 - 4 * ots, hig);
+	ui.coordPresX->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
+	ui.coordPresY->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.but3->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.but4->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.but8->setFixedSize(width() / 4 - 4 * ots, hig);
 
 	//ui.groupCar->setVisible(false);
 	//ui.groupPres->setVisible(false);
@@ -274,32 +298,36 @@ void QtGuiTest1::setSize(int ots) {
 	//ui.angleLine->resize();
 }
 
-void QtGuiTest1::setCar() {
-	float coord[2], gabarites[2],angle1;
+void QtGuiTest1::setCar() {	
 	int index = ui.comboBox->currentData().toInt();
-
-	QString coordX = ui.coordXLine->text();
-	QString coordY = ui.coordYLine->text();
-	QString gabX = ui.gabXLine->text();
-	QString gabY = ui.gabYLine->text();
-	QString name = ui.nameAddLine->text();	
-	QString angle = ui.angleLine->text();
-
-	if ((coordX != "") && (coordY != "") && (gabX != "") && (gabY != "") && (name != "") && (angle != "")) {
-		coord[0] = coordX.toFloat();
-		coord[1] = coordY.toFloat();
-		gabarites[0] = gabX.toFloat();
-		gabarites[1] = gabY.toFloat();
-		angle1 = angle.toFloat();
-		Car addCar(name,angle1,gabarites,coord);
+	Car * car = getCar();
+	if (car) {
 		if (index == -1)
-		{
-			_motors->addElement(addCar);
-		}
+			_motors->addElement(*car);	
 		else
-			_motors->getPres(index).addElement(addCar);
+			(_motors->getPres(index)).addElement(*car);
+		delete car;
 	}
 	update();
+}
+
+Car * QtGuiTest1::getCar() {
+	float coord[2], gabarites[2], angle;
+	int index = ui.comboBox->currentData().toInt();
+	bool ok[5];
+	coord[0] = (ui.coordXLine->text()).toFloat(&ok[0]);
+	coord[1] = (ui.coordYLine->text()).toFloat(&ok[1]);
+	gabarites[0]= (ui.gabXLine->text()).toFloat(&ok[2]);
+	gabarites[1]= (ui.gabYLine->text()).toFloat(&ok[3]);
+	QString name = ui.nameAddLine->text();
+	angle = (ui.angleLine->text()).toFloat(&ok[4]);
+	Car * car = NULL;
+	if ((coord[0] != 0) && (coord[1] != 0) && (gabarites[0] != 0) 
+		&& (gabarites[0] != 0) && (name != "") && (angle != 0)
+		&& ok[0] && ok[1] && ok[2] && ok[3] && ok[4])  {		
+		car = new Car(name, angle, gabarites, coord);		
+	}
+	return car;
 }
 
 /*void QtGuiTest1::changeCar() {
@@ -330,23 +358,31 @@ void QtGuiTest1::setCar() {
 	update();
 }*/
 
-void QtGuiTest1::setPres() {
-	float coord[2], radius;
-	//int index = ui.comboBox->currentData().toInt();
-	QString coordX = ui.coordPresX->text();
-	QString coordY = ui.coordPresY->text();
-	QString name = ui.namePresLine->text();
-	QString rad = ui.radiusPresLine->text();
-
-	if ((coordX != "") && (coordY != "") && (name != "") && (rad != "")) {
-		coord[0] = coordX.toFloat();
-		coord[1] = coordY.toFloat();
-		radius = rad.toFloat();
-		_motors->addPres( radius,  name, coord);
-		
+void QtGuiTest1::setPres() {	
+	Pres * pres = getPres();
+	if (pres)
+	{
+		_motors->addPres(*pres);
+		delete pres;
 	}
 	comboboxAdd();
 	update();
+	
+}
+
+Pres * QtGuiTest1::getPres() {
+	float coord[2], radius;
+	bool ok1, ok2, ok3;
+	//int index = ui.comboBox->currentData().toInt();
+	coord[0] = (ui.coordPresX->text()).toFloat(&ok1);
+	coord[1] = (ui.coordPresY->text()).toFloat(&ok2);
+	QString name = ui.namePresLine->text();
+	radius = (ui.radiusPresLine->text()).toFloat(&ok3);
+	Pres * pres = NULL;
+	if ((coord[0] != 0) && (coord[1] != 0) && (name != "") && (radius != 0) && ok1 && ok2 && ok3) {
+		pres = new Pres(radius, name, coord);
+	}
+	return pres;
 }
 
 void QtGuiTest1::slotBut() {
@@ -415,7 +451,7 @@ void QtGuiTest1::reduce() {
 
 void QtGuiTest1::doVisible1() {
 
-	if (ui.groupField->isVisible() == true)
+	if (ui.groupField->isVisible() )
 		ui.groupField->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
@@ -427,31 +463,33 @@ void QtGuiTest1::doVisible1() {
 
 void QtGuiTest1::doVisible2() {
 
-	if (ui.groupCar->isVisible() == true)
+	if (ui.groupCar->isVisible() && !(ui.but7->isVisible()))
 		ui.groupCar->setVisible(false);
 	else {
 		ui.groupCar->setVisible(true);
 		ui.groupPres->setVisible(false);
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
+		iDo2();
 	}
 }
 
 void QtGuiTest1::doVisible3() {
 
-	if (ui.groupPres->isVisible() == true)
+	if (ui.groupPres->isVisible() && !(ui.groupPres->isVisible()))
 		ui.groupPres->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
 		ui.groupPres->setVisible(true);
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
+		iDo3();
 	}
 }
 
 void QtGuiTest1::doVisible4() {
 
-	if (ui.changeField->isVisible() == true)
+	if (ui.changeField->isVisible() )
 		ui.changeField->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
@@ -459,6 +497,100 @@ void QtGuiTest1::doVisible4() {
 		ui.groupField->setVisible(false); 
 		ui.changeField->setVisible(true); 
 	}
+}
+
+void QtGuiTest1::doVisible5() {
+
+	if (ui.groupCar->isVisible() && ui.but7->isVisible())
+		ui.groupCar->setVisible(false);
+	else {
+		ui.groupCar->setVisible(true);
+		ui.groupPres->setVisible(false);
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+		ui.but7->setVisible(true);
+	}
+}
+
+void QtGuiTest1::doVisible6() {
+
+	if (ui.groupPres->isVisible() && ui.comboPress->isVisible())
+		ui.groupPres->setVisible(false);
+	else {
+		ui.groupCar->setVisible(false);
+		ui.groupPres->setVisible(true);		
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(false);
+		iDo6();
+	}
+}
+
+void QtGuiTest1::iDo2() {
+	ui.but7->setVisible(false);
+
+}
+
+void QtGuiTest1::iDo3() {
+	ui.namePresLine->setEnabled(true);
+	ui.radiusPresLine->setEnabled(true);
+	ui.coordPresX->setEnabled(true);
+	ui.coordPresY->setEnabled(true);
+	ui.but3->setEnabled(true);
+	ui.but4->setEnabled(true);
+	ui.comboPress->setVisible(false);
+	ui.but8->setVisible(false);
+	ui.namePresLine->clear();
+	ui.radiusPresLine->clear();
+	ui.coordPresX->clear();
+	ui.coordPresY->clear();
+	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+}
+
+void QtGuiTest1::iDo6(int k) {
+	ui.comboPress->setVisible(true);
+	ui.but8->setVisible(true);
+	if (ui.comboPress->isEnabled()) {
+		ui.namePresLine->setEnabled(true);
+		ui.radiusPresLine->setEnabled(true);
+		ui.coordPresX->setEnabled(true);
+		ui.coordPresY->setEnabled(true);
+		ui.but3->setEnabled(true);
+		ui.but4->setEnabled(true);
+		ui.but8->setEnabled(true);
+		int index = ui.comboPress->currentData().toInt();
+		ui.namePresLine->setText(_motors->getPres(index).getName());
+		ui.radiusPresLine->setText(QString::number((_motors->getPres(index)).getR()));
+		ui.coordPresX->setText(QString::number((_motors->getPres(index)).getCoord(0)));
+		ui.coordPresY->setText(QString::number((_motors->getPres(index)).getCoord(1)));
+
+	}
+	else {
+		ui.namePresLine->clear();
+		ui.radiusPresLine->clear();
+		ui.coordPresX->clear();
+		ui.coordPresY->clear();
+		ui.namePresLine->setEnabled(false);
+		ui.radiusPresLine->setEnabled(false);
+		ui.coordPresX->setEnabled(false);
+		ui.coordPresY->setEnabled(false);
+		ui.but3->setEnabled(false);
+		ui.but4->setEnabled(false);
+		ui.but8->setEnabled(false);
+	}
+	disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
+}
+
+void QtGuiTest1::cancelPres() {
+	ui.groupPres->setVisible(false);
+}
+
+void QtGuiTest1::deleteThisPres() {
+	int index = ui.comboPress->currentData().toInt();
+	ui.comboPress->clear();
+	_motors->deletePres(index);
+	comboboxAdd();
+	update();
+	iDo6();
 }
 
 /*void QtGuiTest1::iDoCars(int index) {

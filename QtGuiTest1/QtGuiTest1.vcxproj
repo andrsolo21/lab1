@@ -118,9 +118,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MotorShow.cpp" />
     <ClCompile Include="pres.cpp" />
-    <ClCompile Include="presentation.cpp" />
     <ClCompile Include="qtguitest1.cpp" />
-    <ClCompile Include="stend.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="qtguitest1.h" />

@@ -17,10 +17,10 @@
    <widget class="QGroupBox" name="groupCar">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>10</y>
-      <width>181</width>
-      <height>311</height>
+      <x>30</x>
+      <y>90</y>
+      <width>291</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="title">
@@ -32,7 +32,7 @@
        <x>10</x>
        <y>20</y>
        <width>271</width>
-       <height>269</height>
+       <height>301</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -40,13 +40,16 @@
        <number>6</number>
       </property>
       <property name="sizeConstraint">
-       <enum>QLayout::SetNoConstraint</enum>
+       <enum>QLayout::SetMinAndMaxSize</enum>
       </property>
       <property name="rightMargin">
        <number>0</number>
       </property>
       <item>
        <widget class="QComboBox" name="comboBox"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBoxCar"/>
       </item>
       <item>
        <widget class="QLabel" name="label_7">
@@ -71,6 +74,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QLineEdit" name="coordXLine">
           <property name="text">
@@ -85,6 +91,19 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item>
@@ -96,6 +115,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QLineEdit" name="gabXLine">
           <property name="text">
@@ -109,6 +131,19 @@
            <string/>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -127,22 +162,45 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QPushButton" name="but5">
           <property name="text">
-           <string>PushButton</string>
+           <string>отмена</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="but2">
           <property name="text">
-           <string>PushButton</string>
+           <string>добавить</string>
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="but7">
+        <property name="text">
+         <string>удалить</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -150,8 +208,8 @@
    <widget class="QGroupBox" name="groupField">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>0</y>
+      <x>230</x>
+      <y>20</y>
       <width>221</width>
       <height>271</height>
      </rect>
@@ -170,7 +228,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="sizeConstraint">
-       <enum>QLayout::SetMaximumSize</enum>
+       <enum>QLayout::SetMinAndMaxSize</enum>
       </property>
       <item>
        <widget class="QLabel" name="label_8">
@@ -195,14 +253,16 @@
       </item>
      </layout>
     </widget>
+    <zorder>verticalLayoutWidget</zorder>
+    <zorder>changeField</zorder>
    </widget>
    <widget class="QGroupBox" name="groupPres">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>270</y>
-      <width>201</width>
-      <height>241</height>
+      <x>460</x>
+      <y>290</y>
+      <width>281</width>
+      <height>281</height>
      </rect>
     </property>
     <property name="title">
@@ -214,7 +274,7 @@
        <x>10</x>
        <y>20</y>
        <width>211</width>
-       <height>216</height>
+       <height>254</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -226,7 +286,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox3"/>
+       <widget class="QComboBox" name="comboPress"/>
       </item>
       <item>
        <widget class="QLineEdit" name="namePresLine">
@@ -258,6 +318,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QLineEdit" name="coordPresX">
           <property name="text">
@@ -272,25 +335,61 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QPushButton" name="but4">
           <property name="text">
-           <string>PushButton</string>
+           <string>отмена</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="but3">
           <property name="text">
-           <string>PushButton</string>
+           <string>добавить</string>
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="but8">
+        <property name="text">
+         <string>удалить</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -298,9 +397,9 @@
    <widget class="QGroupBox" name="btnGroup">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>490</x>
       <y>30</y>
-      <width>161</width>
+      <width>271</width>
       <height>211</height>
      </rect>
     </property>
@@ -310,15 +409,21 @@
     <widget class="QWidget" name="verticalLayoutWidget_4">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>40</y>
+       <x>10</x>
+       <y>20</y>
        <width>211</width>
        <height>141</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinAndMaxSize</enum>
+      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QPushButton" name="addFieldBut">
           <property name="text">
@@ -333,6 +438,19 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item>
@@ -344,6 +462,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QPushButton" name="addCarBut">
           <property name="text">
@@ -352,11 +473,24 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="changeCarBut">
           <property name="text">
            <string>изменить</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -369,6 +503,9 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinAndMaxSize</enum>
+        </property>
         <item>
          <widget class="QPushButton" name="addPresBut">
           <property name="text">
@@ -377,11 +514,24 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="changePressBut">
           <property name="text">
            <string>изменить</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -404,8 +554,8 @@
    <widget class="QGroupBox" name="changeField">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>290</y>
+      <x>10</x>
+      <y>430</y>
       <width>201</width>
       <height>271</height>
      </rect>
@@ -423,6 +573,9 @@
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinAndMaxSize</enum>
+      </property>
       <item>
        <widget class="QPushButton" name="delAll">
         <property name="text">
