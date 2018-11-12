@@ -9,7 +9,7 @@ Pres::Pres()
 	_coord[0] = 5;
 	_coord[1] = 5;
 	_grr = 0;
-	}
+}
 
 Pres::Pres(float rAdd, QString nameAdd, float coord[], Car carAdd[], int n) {
 	_grr = 0;
@@ -59,7 +59,7 @@ Pres::Pres(std::string name) {
 		file >> _r;
 		file >> s;
 		_name = QString::fromStdString(s);
-		file >> _coord[0] >> _coord[1];		
+		file >> _coord[0] >> _coord[1];
 		float size[2], coord[2], angle;
 		Car * tempCar;
 		for (file >> s; !file.eof(); file >> s) {
@@ -72,7 +72,7 @@ Pres::Pres(std::string name) {
 	}
 }
 
-void Pres::printToFile(std::string f) const {
+void Pres::printToFile(const std::string & f) const {
 	ofstream fout(f, ios_base::out | ios_base::trunc);
 	fout << (_tail - _head) << endl;
 	fout << _r << endl;
@@ -115,7 +115,7 @@ bool Pres::checkName(QString s1) {
 bool Pres::checkGabarits(float dots1[][2]) {
 	for (int j = 0; j < 4; j++) {
 		float rr = (pow(dots1[j][0], 2) + pow(dots1[j][1], 2));
-		if (rr > pow(_r,2))
+		if (rr > pow(_r, 2))
 			return false;
 	}
 	return true;
