@@ -711,11 +711,11 @@ void QtGuiTest1::changeCar() {
 		
 		if (indexC == -1) {
 			if (_motors->getCount() != oldN)
-				_motors->addElement(*car);
+				_motors->addElement(oldCar);
 		}
 		else {
-			if (oldN = (_motors->getPres(indexC)).getCount() != 0)
-				(_motors->getPres(indexC)).addElement(*car);
+			if (oldN != (_motors->getPres(indexC)).getCount())
+				(_motors->getPres(indexC)).addElement(oldCar);
 		}
 		delete car;
 	}
