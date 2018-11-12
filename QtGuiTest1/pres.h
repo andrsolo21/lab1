@@ -15,7 +15,7 @@ public:
 	float getCoord(int i) const;
 	QString difClass() override;
 	bool checkName(QString s1) override;
-	void printToFile(std::string f) const;
+	void printToFile(const std::string & f) const;
 private:
 	bool checkGabarits(float dots1[][2]) override;
 	float _r;

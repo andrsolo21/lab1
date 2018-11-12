@@ -11,7 +11,7 @@ Field::Field()
 	_grrP = 0;
 	_gabarits[0] = 10;
 	_gabarits[1] = 10;
-
+	add = nullptr;
 }
 
 Field::Field(Car * addData[], int addCount, float addGabarits[]) {
@@ -31,6 +31,7 @@ Field::Field(Car * addData[], int addCount, float addGabarits[]) {
 	for (int i = 0; i < addCount; i++) {
 		addElement(*addData[i]);
 	}
+	add = nullptr;
 }
 
 Field::Field(const Field & addData) {
@@ -46,6 +47,7 @@ Field::Field(const Field & addData) {
 	for (int i = 0; i < addData.getCount(); i++) {
 		addElement(addData[i]);
 	}
+	add = nullptr;
 }
 
 Field::Field(std::string name) {
@@ -75,10 +77,11 @@ Field::Field(std::string name) {
 		}
 		file.close();
 	}
+	add = nullptr;
 
 }
 
-void Field::printToFile(std::string f) const {
+void Field::printToFile(const std::string& f) const {
 	ofstream fout(f, ios_base::out | ios_base::trunc);
 	fout << (_tail - _head) << endl;
 	fout << _gabarits[0] << ' ';
@@ -135,9 +138,9 @@ Pres Field::getPres(int c) const {
 		throw std::exception("index out of range");
 }
 
-void Field::addPres(std::string f) {
+void Field::addPres(const std::string& f) {
 	Pres * element = new Pres(f);
-	if ( checkPres(*element)) {
+	if (checkPres(*element)) {
 
 		grow5P();
 		*_tailP = *element;
@@ -147,16 +150,16 @@ void Field::addPres(std::string f) {
 }
 
 void Field::addPres(float rAdd, QString nameAdd, float coord[], Car carAdd[], int n) {
-	Pres element(rAdd, nameAdd,coord, carAdd, n);
-	if ( checkPres(element)) {
+	Pres element(rAdd, nameAdd, coord, carAdd, n);
+	if (checkPres(element)) {
 		grow5P();
 		*(_tailP) = element;
 		_tailP = _tailP + 1;
 	}
 }
 
-void Field::addPres(const Pres addData) {
-	if ( checkPres(addData)) {
+void Field::addPres(const Pres& addData) {
+	if (checkPres(addData)) {
 		grow5P();
 		*(_tailP) = addData;
 		_tailP = _tailP + 1;
@@ -168,16 +171,16 @@ int Field::getCountP() {
 }
 
 bool Field::checkWithElipse(float dots1[][2]) {
-	
+
 	for (auto i = _headP; i < _tailP; i++) {
 		if (!checkElRe(dots1, *i))
 			return false;
-	}	
+	}
 	return true;
 }
 
-bool Field::checkElRe( float dots1[][2],  Pres circle)  {
-	float center[2], rr,mass[2];
+bool Field::checkElRe(float dots1[][2], const Pres& circle) {
+	float center[2], rr, mass[2];
 	center[0] = circle.getCoord(0);
 	center[1] = circle.getCoord(1);
 	for (int j = 0; j < 4; j++) {
@@ -188,14 +191,14 @@ bool Field::checkElRe( float dots1[][2],  Pres circle)  {
 
 	for (int j = 0; j < 3; j++) {
 
-		mass[0] = roLineDot(dots1[j], dots1[j + 1], center,0);
+		mass[0] = roLineDot(dots1[j], dots1[j + 1], center, 0);
 		mass[1] = roLineDot(dots1[j], dots1[j + 1], center, 1);
 		rr = sqrt(pow(mass[0] - circle.getCoord(0), 2) + pow(mass[1] - circle.getCoord(1), 2));
 		if (rr <= circle.getR() && (
-			(mass[0] > dots1[j][0]) && (mass[0] < dots1[j+1][0]) ||
-			(mass[0] < dots1[j][0]) && (mass[0] > dots1[j+1][0]) ||
+			(mass[0] > dots1[j][0]) && (mass[0] < dots1[j + 1][0]) ||
+			(mass[0] < dots1[j][0]) && (mass[0] > dots1[j + 1][0]) ||
 			(mass[1] > dots1[j][1]) && (mass[1] < dots1[j + 1][1]) ||
-			(mass[1] < dots1[j][1]) && (mass[1] > dots1[j + 1][1]) 
+			(mass[1] < dots1[j][1]) && (mass[1] > dots1[j + 1][1])
 			))
 			return false;
 	}
@@ -213,9 +216,9 @@ bool Field::checkElRe( float dots1[][2],  Pres circle)  {
 	return true;
 }
 
-float  Field::roLineDot(float dot1[], float dot2[], float o[],int i)  {
-	float a, b, c,mass[2];
-	if (dot1[0] != dot2[0]) 
+float  Field::roLineDot(float dot1[], float dot2[], float o[], int i) {
+	float a, b, c, mass[2];
+	if (dot1[0] != dot2[0])
 		a = 1 / (dot2[0] - dot1[0]);
 	else {
 		mass[0] = dot1[0];
@@ -232,14 +235,14 @@ float  Field::roLineDot(float dot1[], float dot2[], float o[],int i)  {
 	}
 
 	c = dot1[0] / (dot2[0] - dot1[0]) - dot1[1] / (dot2[1] - dot1[1]);
-	mass[1] = (b*a*o[0] + a*a*o[1]-c*b)/(a*a + b*b);
+	mass[1] = (b*a*o[0] + a * a*o[1] - c * b) / (a*a + b * b);
 	mass[0] = a * (mass[1] - o[1]) / b - o[0];
 
 	return mass[i];
 }
 
-bool Field::checkPres(Pres element) {
-	for (auto i = _head; i < _tail;i++) {
+bool Field::checkPres(const Pres& element) {
+	for (auto i = _head; i < _tail; i++) {
 		float dots1[4][2];
 		for (int j = 0; j < 2; j++) {
 			dots1[0][j] = i->getA(j);
@@ -247,7 +250,7 @@ bool Field::checkPres(Pres element) {
 			dots1[2][j] = i->getC(j);
 			dots1[3][j] = i->getD(j);
 		}
-		if (!checkElRe(dots1,element))
+		if (!checkElRe(dots1, element))
 			return false;
 	}
 	for (auto i = _headP; i < _tailP; i++) {
@@ -255,25 +258,25 @@ bool Field::checkPres(Pres element) {
 			sqrt(pow(i->getCoord(0) - element.getCoord(0), 2) + pow(i->getCoord(1) - element.getCoord(1), 2)))
 			return false;
 	}
-	if (element.getCoord(0) +element.getR() > _gabarits[0]) 
+	if (element.getCoord(0) + element.getR() > _gabarits[0])
 		return false;
 
 	if (element.getCoord(1) + element.getR() > _gabarits[1])
 		return false;
-	
+
 	if (element.getCoord(0) - element.getR() < 0)
 		return false;
 
 	if (element.getCoord(1) - element.getR() < 0)
 		return false;
 
-	
+
 	return true;
 }
 
 void Field::deletePres(int c) {
 	if (c < (_tailP - _headP) && c >= 0) {
-		for (auto i = _headP + c; i < _tailP -1; i++)
+		for (auto i = _headP + c; i < _tailP - 1; i++)
 			*i = *(i + 1);
 		_tailP--;
 	}
@@ -287,7 +290,7 @@ void Field::deleteAllPres() {
 	_headP = NULL;
 	_grrP = 0;*/
 	_tailP = _headP;
-	
+
 }
 
 void Field::deleteAll() {
@@ -299,14 +302,14 @@ void Field::deleteAll() {
 	_grr = 0;
 
 	//_tail = _head;
-	
+
 	for (auto i = _headP; i < _tailP; i++)
 		delete i;
 	delete[] _headP;
 	_tailP = NULL;
 	_headP = NULL;
 	_grrP = 0;
-	
+
 	//_tailP = _headP;
 }
 

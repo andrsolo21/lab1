@@ -13,27 +13,27 @@ public:
 
 	float getGabarits(int i) const;
 	Pres getPres(int c) const;
-	void addPres(std::string f);
+	void addPres(const std::string& f);
 	void addPres(float rAdd, QString nameAdd, float coord[], Car carAdd[] = {}, int n = 0);
-	void addPres(const Pres  addData);
+	void addPres(const Pres&  addData);
 	int getCountP();
 	void deletePres(int i);
 	void deleteAllPres();
 	void deleteAll() override;
 	QString difClass() override;
-	void printToFile(std::string f) const;
-	
+	void printToFile(const std::string& f) const;
+
 private:
 
 
-	Pres *_headP, *_tailP, * add;
+	Pres *_headP, *_tailP, *add;
 	int _grrP = 0;
 
 	void grow5P();
 
-	bool checkPres(Pres element) ;
+	bool checkPres(const Pres& element);
 	bool checkWithElipse(float dots1[][2]) override;
-	float  roLineDot(float dot1[],float dot2[], float o[], int i) ;
-	bool checkElRe(float dots1[][2], Pres Circle) ;
+	float  roLineDot(float dot1[], float dot2[], float o[], int i);
+	bool checkElRe(float dots1[][2], const Pres& Circle);
 };
 

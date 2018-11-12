@@ -9,7 +9,7 @@ MotorShow::MotorShow()
 	_grr = 0;
 	_gabarits[0] = 10;
 	_gabarits[1] = 10;
-	
+
 }
 
 MotorShow::MotorShow(Car * addData[], int addCount, float addGabarits[]) {
@@ -23,7 +23,7 @@ MotorShow::MotorShow(Car * addData[], int addCount, float addGabarits[]) {
 
 	grow10(addCount);
 	for (int i = 0; i < addCount; i++) {
- 		addElement(*addData[i]);
+		addElement(*addData[i]);
 	}
 }
 
@@ -48,7 +48,7 @@ MotorShow::MotorShow(std::string name) {
 	_tail = NULL;
 	_grr = 0;
 
-	
+
 	int n;
 	ifstream file(name);
 	if (file.is_open())
@@ -68,7 +68,7 @@ MotorShow::MotorShow(std::string name) {
 		}
 		file.close();
 	}
-	
+
 }
 
 Car MotorShow::operator [](int c) const
@@ -85,7 +85,7 @@ int MotorShow::getCount() const {
 	return (_tail - _head);
 }
 
-void MotorShow::addElement(Car  element) {
+void MotorShow::addElement(const Car & element) {
 	if (element.isInit() && checkCar(element)) {
 		grow10();
 		Car * tempCar = new Car(element);
@@ -97,7 +97,7 @@ void MotorShow::addElement(Car  element) {
 
 void MotorShow::deleteElement(int c) {
 	if (c < (_tail - _head) && c >= 0) {
-		for (auto i = _head + c; i < _tail-1; i++) 
+		for (auto i = _head + c; i < _tail - 1; i++)
 			*i = *(i + 1);
 		_tail--;
 	}
@@ -120,7 +120,7 @@ void MotorShow::deleteAllElements() {
 	_tail = NULL;
 	_head = NULL;
 	_grr = 0;
-	
+
 }
 
 
@@ -131,12 +131,12 @@ void MotorShow::grow10(int zn) {
 
 		bool first = false;
 		if (_grr == 0)
-			first = true;	
+			first = true;
 
 		if (zn % 10)
 			_grr++;
 		_grr += zn / 10;
-		
+
 		Car * add = new Car[10 * _grr];
 		if (first) {
 			_head = add;
@@ -155,10 +155,10 @@ void MotorShow::grow10(int zn) {
 	}
 }
 
-bool MotorShow::checkCar(const Car carToCheck) {
+bool MotorShow::checkCar(const Car & carToCheck) {
 	float d;
-	bool flag1, flag2,flag = true;
-	float dots1[4][2],right,top;
+	bool flag1, flag2, flag = true;
+	float dots1[4][2], right, top;
 	for (int j = 0; j < 2; j++) {
 		dots1[0][j] = carToCheck.getA(j);
 		dots1[1][j] = carToCheck.getB(j);
@@ -173,7 +173,7 @@ bool MotorShow::checkCar(const Car carToCheck) {
 	if (difClass() == "field")
 		if (!checkWithElipse(dots1))
 			return false;
-	for (Car * i = _head; i < _tail; i++) {	
+	for (Car * i = _head; i < _tail; i++) {
 		d = sqrt((i->getCoord(0) - carToCheck.getCoord(0)) * (i->getCoord(0) - carToCheck.getCoord(0)) +
 			(i->getCoord(1) - carToCheck.getCoord(1)) * (i->getCoord(1) - carToCheck.getCoord(1)));
 		if (i->getRSmall() + carToCheck.getRSmall() > d)

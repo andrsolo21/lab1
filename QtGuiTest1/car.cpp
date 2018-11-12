@@ -33,12 +33,12 @@ Car::Car(QString nameAdd, float angleAdd, float sizeAdd[], float coordAdd[]) {
 		_size[1] = sizeAdd[1];
 	else {
 		_initCar = false;
-		_size[1] = 3; 
+		_size[1] = 3;
 	}
 	_coord[0] = coordAdd[0];
-	
+
 	_coord[1] = coordAdd[1];
-	
+
 	if (_initCar)
 		calculate();
 }
@@ -139,5 +139,5 @@ bool Car::isInit() const {
 }
 Car::~Car()
 {
-	
+
 }

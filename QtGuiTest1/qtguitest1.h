@@ -18,7 +18,7 @@ public:
 	QtGuiTest1(QWidget *parent = Q_NULLPTR);
 	void paintEvent(QPaintEvent *event);
 	void readObjects(std::string s);
-	
+
 	/*
 signals:
 	void signalFromButton();
@@ -69,24 +69,24 @@ public slots:
 
 private:
 	Ui::QtGuiTest1Class ui;
-	int _gabarits[2] = { 0 ,0};
+	int _gabarits[2] = { 0 ,0 };
 	float _otn = 1;
 	Field *_motors = NULL;
 	QLineEdit * lines;
 	QPushButton * butt;
-	QPolygonF rectMy(qreal a, qreal b, QPointF center, float alpha = 0);
+	QPolygonF rectMy(qreal a, qreal b, const QPointF& center, float alpha = 0);
 
 	Pres * getPres();
 	Car * getCar();
 	void comboboxAdd();
 	//void comboboxChange();
-	
+
 	//void whatDoCarsBox();
 	void setSize(int ots);
-	
-	
+
+
 
 	void coonections();
 	bool _btns = true;
-	
+
 };

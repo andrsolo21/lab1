@@ -1,45 +1,45 @@
 #include "qtguitest1.h"
 
-bool fileIsExist(std::string filePath);
+bool fileIsExist(const std::string & filePath);
 
 QtGuiTest1::QtGuiTest1(QWidget *parent)
 	: QMainWindow(parent)
 {
-	
+
 
 	ui.setupUi(this);
 	ui.groupCar->setVisible(false);
 	ui.groupPres->setVisible(false);
-	ui.groupField->setVisible(false); 
+	ui.groupField->setVisible(false);
 	ui.changeField->setVisible(false);
 	ui.btnGroup->setVisible(true);
 	coonections();
 	slotBut();
-	
+
 }
 
 void QtGuiTest1::paintEvent(QPaintEvent *event)
 {
 	QPainter painter(this);
-	QPolygonF polygon, fon,fon1;
-	int ots = 7;	
-	qreal gabs[2] = {0,0};
-	if (width() < 30 || height() < 30|| height() < 3 * ots + 1)
+	QPolygonF polygon, fon, fon1;
+	int ots = 7;
+	qreal gabs[2] = { 0,0 };
+	if (width() < 30 || height() < min(30, 3 * ots + 1))
 		return;
-	
+
 	//ui.toolBox->move(width() / 4 * 3,ots * 2);
 	//ui.toolBox->(width() / 1 * 3, height() - ots * 3);
 	setSize(ots);
 	QPointF center, center2, center3;
 	float w, h;
-	
+
 	//��������� ����
 	if (_btns) {
-		w = width() / 4 * 3 - ots * 2;
+		w = (double)width() / 4 * 3 - ots * 2;
 		h = height() - ots * 2;
-		
+
 		fon1 << QPointF(0, 0);
-		fon1 << QPointF(width() / 4 * 3 , 0);
+		fon1 << QPointF(width() / 4 * 3, 0);
 		fon1 << QPointF(width() / 4 * 3, height());
 		fon1 << QPointF(0, height());
 		painter.setBrush(QBrush(Qt::lightGray));
@@ -47,12 +47,12 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 		painter.drawPolygon(fon1);
 	}
 	else {
-		w = width()  - ots * 2;
+		w = width() - ots * 2;
 		h = height() - ots * 2;
-		
+
 		fon1 << QPointF(0, 0);
-		fon1 << QPointF(width() , 0);
-		fon1 << QPointF(width() , height());
+		fon1 << QPointF(width(), 0);
+		fon1 << QPointF(width(), height());
 		fon1 << QPointF(0, height());
 		painter.setBrush(QBrush(Qt::lightGray));
 		painter.setPen(QPen(Qt::lightGray));
@@ -62,37 +62,37 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 
 	//��������� ����
 	if (_gabarits[1] == 0) {
-		fon << QPointF(ots, ots );
-		fon << QPointF(ots + w, ots );
-		fon << QPointF(ots + w,  ots + h);
-		fon << QPointF(ots,  ots + h);
+		fon << QPointF(ots, ots);
+		fon << QPointF(ots + w, ots);
+		fon << QPointF(ots + w, ots + h);
+		fon << QPointF(ots, ots + h);
 		painter.setPen(QPen(Qt::gray));
 	}
 	else {
 		float otn0 = w / _gabarits[0];
 		float otn1 = h / _gabarits[1];
-		center = QPointF(w / 2 + ots, h / 2 +  ots);
+		center = QPointF(w / 2 + ots, h / 2 + ots);
 		float alpha = 0;
 		if (otn0 < otn1) {
 			_otn = otn0;
 			gabs[0] = w;
-			gabs[1] = w / _gabarits[0] * _gabarits[1];			
+			gabs[1] = w / _gabarits[0] * _gabarits[1];
 		}
 		else {
 			_otn = otn1;
 			gabs[1] = h;
 			gabs[0] = h / _gabarits[1] * _gabarits[0];
 		}
-		fon = rectMy(gabs[0], gabs[1],  center, alpha);
+		fon = rectMy(gabs[0], gabs[1], center, alpha);
 		painter.setPen(QPen(Qt::black));
 	}
 
 	painter.setBrush(QBrush(Qt::white));
-	
+
 	painter.drawPolygon(fon);
 
 	//�������� ������
-	
+
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
 		for (int i = 0; i < _motors->getCountP(); i++) {
@@ -112,7 +112,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 					center3, (_motors->getPres(i))[j].getAngle());
 				painter.drawPolygon(polygon);
 			}
-		}		
+		}
 	}
 
 	//��������� �����
@@ -125,7 +125,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 				(*_motors)[i].getCoord(1)* _otn + center.y() - gabs[1] / 2);
 
 			polygon = rectMy((*_motors)[i].getSize(0) * _otn, (*_motors)[i].getSize(1) * _otn, center2,
-				 (*_motors)[i].getAngle());
+				(*_motors)[i].getAngle());
 			painter.drawPolygon(polygon);
 		}
 	}
@@ -144,7 +144,7 @@ void QtGuiTest1::coonections() {
 	connect(ui.changeFieldBut, SIGNAL(clicked()), this, SLOT(doVisible4()));
 	connect(ui.changeCarBut, SIGNAL(clicked()), this, SLOT(doVisible5()));
 	connect(ui.changePressBut, SIGNAL(clicked()), this, SLOT(doVisible6()));
-	
+
 	connect(ui.but5, SIGNAL(clicked()), this, SLOT(cancelCar()));
 	connect(ui.but7, SIGNAL(clicked()), this, SLOT(deleteThisCar()));
 
@@ -155,12 +155,12 @@ void QtGuiTest1::coonections() {
 	//connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboSelectItem(int)));
 	connect(ui.comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboCar(int)));
 	connect(ui.comboBoxCar, SIGNAL(currentIndexChanged(int)), this, SLOT(iDo5(int)));
-	
+
 	connect(ui.delAllCars, SIGNAL(clicked()), this, SLOT(deleteAllElements()));
 	connect(ui.delAllPres, SIGNAL(clicked()), this, SLOT(deleteAllPres()));
 	connect(ui.delAll, SIGNAL(clicked()), this, SLOT(deleteAll()));
-	
-	
+
+
 	//connect(ui.comboBox, SIGNAL(activated(int)), this, SLOT(comboSelectItem(int)));
 	//connect(ui.whatDoCars, SIGNAL(currentIndexChanged(int)), this, SLOT(iDoCars(int)));
 }
@@ -176,15 +176,15 @@ void QtGuiTest1::comboboxAdd() {
 	}
 	ui.comboBox->removeItem(i);
 
-	ui.comboBox -> addItem(s, QVariant(-1));
+	ui.comboBox->addItem(s, QVariant(-1));
 	if (_motors->getCountP() > 0)
 		for (int i = 0; i < _motors->getCountP(); i++) {
 			ui.comboBox->addItem((_motors->getPres(i)).getName(), QVariant(i));
 			ui.comboPress->addItem((_motors->getPres(i)).getName(), QVariant(i));
 		}
-	else 
+	else
 		ui.comboPress->setEnabled(false);
-	
+
 }
 
 void QtGuiTest1::comboCar(int index) {
@@ -203,23 +203,23 @@ void QtGuiTest1::comboCar(int index) {
 	else {
 		if ((_motors->getPres(index)).getCount() != 0)
 			for (int i = 0; i < (_motors->getPres(index)).getCount(); i++) {
-				
+
 				ui.comboBoxCar->addItem(((_motors->getPres(index))[i]).getName() + QString::number(i), QVariant(i));
 			}
 		else
 			ui.comboBoxCar->setEnabled(false);
 	}
-	
+
 }
 
 void QtGuiTest1::printToFile() {
 	std::string name = (ui.strToFile->text()).toStdString();
 	ofstream fout(name, ios_base::out | ios_base::trunc);
 	std::string mainFile = "file.txt";
-	fout << _motors->getCountP()  + 1<< endl;
+	fout << _motors->getCountP() + 1 << endl;
 	fout << mainFile;
 
-	for (auto i = 0; _motors->getCountP() ; i++) {
+	for (auto i = 0; _motors->getCountP(); i++) {
 		fout << endl << (_motors->getPres(i).getName()).toStdString();
 	}
 	fout.close();
@@ -227,7 +227,7 @@ void QtGuiTest1::printToFile() {
 	for (auto i = 0; _motors->getCountP(); i++) {
 		_motors->getPres(i).printToFile((_motors->getPres(i).getName()).toStdString());
 	}
-	
+
 }
 
 /*void QtGuiTest1::comboboxChange() {
@@ -236,7 +236,7 @@ void QtGuiTest1::printToFile() {
 		ui.comboBox->addItem(((*_motors)[i]).getName(), QVariant(i));
 }*/
 
-/*void QtGuiTest1::whatDoCarsBox() {	
+/*void QtGuiTest1::whatDoCarsBox() {
 	ui.whatDoCars->addItem("Add", QVariant(0));
 	ui.whatDoCars->addItem("Change", QVariant(1));
 	ui.whatDoCars->addItem("Delete", QVariant(2));
@@ -269,13 +269,13 @@ void QtGuiTest1::printToFile() {
 
 void QtGuiTest1::setSize(int ots) {
 	int w = width(), h = height();
-	
-	QRect a = { w / 4 * 3 + ots, h / 3 +  ots,
-		w / 4 - 2*ots, h *2/3 };	
+
+	QRect a = { w / 4 * 3 + ots, h / 3 + ots,
+		w / 4 - 2 * ots, h * 2 / 3 };
 	QRect b = { w / 4 * 3 + ots, ots,
-		w / 4 - 2 * ots, h  / 3 };
+		w / 4 - 2 * ots, h / 3 };
 	int hig = 23;
-	
+
 	ui.btnGroup->setGeometry(b);
 
 	ui.groupField->setGeometry(a);
@@ -283,7 +283,7 @@ void QtGuiTest1::setSize(int ots) {
 	ui.but->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.delAll->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.delAllCars->setFixedSize(width() / 4 - 4 * ots, hig);
-	ui.delAllPres->setFixedSize(width() / 4 - 4 * ots, hig); 
+	ui.delAllPres->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.strToFile->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.printBtn->setFixedSize(width() / 4 - 4 * ots, hig);
 
@@ -302,10 +302,10 @@ void QtGuiTest1::setSize(int ots) {
 	ui.comboBoxCar->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.nameAddLine->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.angleLine->setFixedSize(width() / 4 - 4 * ots, hig);
-	ui.coordXLine->setFixedSize((width() / 4 - 4 * ots) / 2  - ots/2, hig);
-	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
-	ui.gabXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
-	ui.gabYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
+	ui.coordXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.coordYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.gabXLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
+	ui.gabYLine->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 	ui.but5->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 	ui.but2->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 	ui.but7->setFixedSize(width() / 4 - 4 * ots, hig);
@@ -314,7 +314,7 @@ void QtGuiTest1::setSize(int ots) {
 	ui.comboPress->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.namePresLine->setFixedSize(width() / 4 - 4 * ots, hig);
 	ui.radiusPresLine->setFixedSize(width() / 4 - 4 * ots, hig);
-	ui.coordPresX->setFixedSize((width() / 4 - 4 * ots) / 2 - ots/2, hig);
+	ui.coordPresX->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 	ui.coordPresY->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 	ui.but3->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
 	ui.but4->setFixedSize((width() / 4 - 4 * ots) / 2 - ots / 2, hig);
@@ -341,15 +341,15 @@ Car * QtGuiTest1::getCar() {
 	bool ok[5];
 	coord[0] = (ui.coordXLine->text()).toFloat(&ok[0]);
 	coord[1] = (ui.coordYLine->text()).toFloat(&ok[1]);
-	gabarites[0]= (ui.gabXLine->text()).toFloat(&ok[2]);
-	gabarites[1]= (ui.gabYLine->text()).toFloat(&ok[3]);
+	gabarites[0] = (ui.gabXLine->text()).toFloat(&ok[2]);
+	gabarites[1] = (ui.gabYLine->text()).toFloat(&ok[3]);
 	QString name = ui.nameAddLine->text();
 	angle = (ui.angleLine->text()).toFloat(&ok[4]);
 	Car * car = NULL;
-	if ((coord[0] != 0) && (coord[1] != 0) && (gabarites[0] != 0) 
-		&& (gabarites[0] != 0) && (name != "") && (angle != 0)
-		&& ok[0] && ok[1] && ok[2] && ok[3] && ok[4])  {		
-		car = new Car(name, angle, gabarites, coord);		
+	if ((coord[0] != 0) && (coord[1] != 0) && (gabarites[0] != 0)
+		&& (gabarites[1] != 0) && (!name.isEmpty()) && (angle != 0)
+		&& ok[0] && ok[1] && ok[2] && ok[3] && ok[4]) {
+		car = new Car(name, angle, gabarites, coord);
 	}
 	return car;
 }
@@ -391,7 +391,7 @@ Pres * QtGuiTest1::getPres() {
 	QString name = ui.namePresLine->text();
 	radius = (ui.radiusPresLine->text()).toFloat(&ok3);
 	Pres * pres = NULL;
-	if ((coord[0] != 0) && (coord[1] != 0) && (name != "") && (radius != 0) && ok1 && ok2 && ok3) {
+	if ((coord[0] != 0) && (coord[1] != 0) && (!name.isEmpty()) && (radius != 0) && ok1 && ok2 && ok3) {
 		pres = new Pres(radius, name, coord);
 	}
 	return pres;
@@ -409,12 +409,11 @@ void QtGuiTest1::slotBut() {
 }
 
 void QtGuiTest1::readObjects(std::string name) {
-	if (_motors != NULL)
-		delete _motors;
+	delete _motors;
 	int n;
 	ifstream file(name);
 	if (file.is_open())
-	{		
+	{
 		file >> n;
 		std::string s;
 		file >> s;
@@ -423,16 +422,16 @@ void QtGuiTest1::readObjects(std::string name) {
 		_gabarits[0] = _motors->getGabarits(0);
 		_gabarits[1] = _motors->getGabarits(1);
 
-		
-		for (int i = 0;i < n-1; i++) {
+
+		for (int i = 0; i < n - 1; i++) {
 			file >> s;
-			Pres * tempPres = new Pres(s);
+			//Pres * tempPres = new Pres(s);
 			_motors->addPres(s);
 		}
 		file.close();
 	}
 
-	
+
 
 	//setEnabledAddCar(true);
 	//setEnabledAddPres(true);
@@ -465,7 +464,7 @@ void QtGuiTest1::reduce() {
 
 void QtGuiTest1::doVisible1() {
 
-	if (ui.groupField->isVisible() )
+	if (ui.groupField->isVisible())
 		ui.groupField->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
@@ -503,13 +502,13 @@ void QtGuiTest1::doVisible3() {
 
 void QtGuiTest1::doVisible4() {
 
-	if (ui.changeField->isVisible() )
+	if (ui.changeField->isVisible())
 		ui.changeField->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
 		ui.groupPres->setVisible(false);
-		ui.groupField->setVisible(false); 
-		ui.changeField->setVisible(true); 
+		ui.groupField->setVisible(false);
+		ui.changeField->setVisible(true);
 	}
 }
 
@@ -537,7 +536,7 @@ void QtGuiTest1::doVisible6() {
 		ui.groupPres->setVisible(false);
 	else {
 		ui.groupCar->setVisible(false);
-		ui.groupPres->setVisible(true);		
+		ui.groupPres->setVisible(true);
 		ui.groupField->setVisible(false);
 		ui.changeField->setVisible(false);
 		ui.comboPress->setVisible(true);
@@ -600,10 +599,10 @@ void QtGuiTest1::iDo5(int k) {
 		count = _motors->getCount();
 	else
 		count = (_motors->getPres(indexC)).getCount();
-	
+
 	if (count != 0 && ui.comboBoxCar->isEnabled()) {
 		Car *car;
-		
+
 		ui.nameAddLine->setEnabled(true);
 		ui.angleLine->setEnabled(true);
 		ui.coordXLine->setEnabled(true);
@@ -612,7 +611,7 @@ void QtGuiTest1::iDo5(int k) {
 		ui.gabYLine->setEnabled(true);
 		ui.but2->setEnabled(true);
 		ui.but5->setEnabled(true);
-		if (indexC == -1) 
+		if (indexC == -1)
 			car = new Car((*_motors)[index]);
 		else
 			car = new Car((_motors->getPres(indexC))[index]);
@@ -622,6 +621,7 @@ void QtGuiTest1::iDo5(int k) {
 		ui.gabXLine->setText(QString::number(car->getSize(0)));
 		ui.coordYLine->setText(QString::number(car->getCoord(1)));
 		ui.gabYLine->setText(QString::number(car->getSize(1)));
+		delete car;
 	}
 	else {
 		ui.nameAddLine->clear();
@@ -639,10 +639,10 @@ void QtGuiTest1::iDo5(int k) {
 		ui.but2->setEnabled(false);
 		ui.but5->setEnabled(false);
 		ui.but7->setEnabled(false);
-	}	
+	}
 }
 
-void QtGuiTest1::iDo6(int k) {	
+void QtGuiTest1::iDo6(int k) {
 	if (ui.comboPress->isEnabled()) {
 		/*ui.namePresLine->setEnabled(true);
 		ui.radiusPresLine->setEnabled(true);
@@ -669,7 +669,7 @@ void QtGuiTest1::iDo6(int k) {
 		ui.but3->setEnabled(false);
 		ui.but4->setEnabled(false);
 		ui.but8->setEnabled(false);
-	}	
+	}
 }
 
 
@@ -708,7 +708,7 @@ void QtGuiTest1::changeCar() {
 			(_motors->getPres(indexC)).deleteElement(index);
 			(_motors->getPres(indexC)).addElement(*car);
 		}
-		
+
 		if (indexC == -1) {
 			if (_motors->getCount() != oldN)
 				_motors->addElement(oldCar);
@@ -730,7 +730,7 @@ void QtGuiTest1::cancelCar() {
 void QtGuiTest1::deleteThisCar() {
 	int indexC = ui.comboBox->currentData().toInt();
 	int index = ui.comboBoxCar->currentData().toInt();
-	
+
 	if (indexC == -1)
 		_motors->deleteElement(index);
 	else {
@@ -748,8 +748,8 @@ void QtGuiTest1::setPres() {
 		_motors->addPres(*pres);
 		delete pres;
 	}
-	
-	
+
+
 	comboboxAdd();
 	update();
 	doVisible3();
@@ -757,7 +757,7 @@ void QtGuiTest1::setPres() {
 }
 
 void QtGuiTest1::changePres() {
-	int index = ui.comboPress->currentData().toInt() , oldN = _motors->getCountP();
+	int index = ui.comboPress->currentData().toInt(), oldN = _motors->getCountP();
 	Pres * pres = getPres(), oldPres = _motors->getPres(index);
 	if (pres) {
 		_motors->deletePres(index);
@@ -805,7 +805,7 @@ void QtGuiTest1::deleteThisPres() {
 	}
 }*/
 
-QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {
+QPolygonF QtGuiTest1::rectMy(qreal a, qreal b, const  QPointF& center, float alpha) {
 	float radius2;
 	QPolygonF polygon;
 	radius2 = sqrt(pow(a / 2, 2) + pow(b / 2, 2));
@@ -827,7 +827,7 @@ QPolygonF QtGuiTest1::rectMy(qreal a, qreal b,  QPointF center, float alpha) {
 	return polygon;
 }
 
-bool fileIsExist(std::string filePath)
+bool fileIsExist(const std::string & filePath)
 {
 	bool isExist = false;
 	std::ifstream fin(filePath.c_str());
