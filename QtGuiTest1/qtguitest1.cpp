@@ -33,7 +33,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	QPointF center, center2, center3;
 	float w, h;
 	
-	//отрисовка фона
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	if (_btns) {
 		w = width() / 4 * 3 - ots * 2;
 		h = height() - ots * 2;
@@ -60,7 +60,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	}
 
 
-	//отрисовка поля
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	if (_gabarits[1] == 0) {
 		fon << QPointF(ots, ots );
 		fon << QPointF(ots + w, ots );
@@ -91,7 +91,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 	
 	painter.drawPolygon(fon);
 
-	//отрсовка стенда
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
@@ -115,7 +115,7 @@ void QtGuiTest1::paintEvent(QPaintEvent *event)
 		}		
 	}
 
-	//отрисовка машин
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	painter.setBrush(QBrush(Qt::yellow));
 	painter.setPen(QPen(Qt::black));
 	if (_motors != NULL) {
@@ -525,7 +525,7 @@ void QtGuiTest1::doVisible5() {
 		ui.but7->setVisible(true);
 		ui.comboBoxCar->setVisible(true);
 		iDo5();
-		ui.but5->setText(QString::fromLocal8Bit("изменить"));
+		ui.but5->setText(QString::fromLocal8Bit("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 		disconnect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 		connect(ui.but2, SIGNAL(clicked()), this, SLOT(changeCar()));
 	}
@@ -543,7 +543,7 @@ void QtGuiTest1::doVisible6() {
 		ui.comboPress->setVisible(true);
 		ui.but8->setVisible(true);
 		iDo6();
-		ui.but3->setText(QString::fromLocal8Bit("изменить"));
+		ui.but3->setText(QString::fromLocal8Bit("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 		disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
 		connect(ui.but3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}
@@ -569,7 +569,7 @@ void QtGuiTest1::iDo2() {
 	ui.gabXLine->clear();
 	ui.coordYLine->clear();
 	ui.gabYLine->clear();
-	ui.but2->setText(QString::fromLocal8Bit("добавить"));
+	ui.but2->setText(QString::fromLocal8Bit("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 	disconnect(ui.but2, SIGNAL(clicked()), this, SLOT(changeCar()));
 	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 }
@@ -587,7 +587,7 @@ void QtGuiTest1::iDo3() {
 	ui.radiusPresLine->clear();
 	ui.coordPresX->clear();
 	ui.coordPresY->clear();
-	ui.but3->setText(QString::fromLocal8Bit("добавить"));
+	ui.but3->setText(QString::fromLocal8Bit("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 	disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(changePres()));
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
 }
