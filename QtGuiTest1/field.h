@@ -26,7 +26,7 @@ public:
 private:
 
 
-	Pres *_headP, *_tailP, *add;
+	Pres *_headP, *_tailP, *_add;
 	int _grrP = 0;
 
 	void grow5P();

@@ -77,14 +77,11 @@
     <ClInclude Include="field.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stend.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="presentation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

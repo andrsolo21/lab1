@@ -11,7 +11,7 @@ Field::Field()
 	_grrP = 0;
 	_gabarits[0] = 10;
 	_gabarits[1] = 10;
-	add = nullptr;
+	_add = nullptr;
 }
 
 Field::Field(Car * addData[], int addCount, float addGabarits[]) {
@@ -31,7 +31,7 @@ Field::Field(Car * addData[], int addCount, float addGabarits[]) {
 	for (int i = 0; i < addCount; i++) {
 		addElement(*addData[i]);
 	}
-	add = nullptr;
+	_add = nullptr;
 }
 
 Field::Field(const Field & addData) {
@@ -47,7 +47,7 @@ Field::Field(const Field & addData) {
 	for (int i = 0; i < addData.getCount(); i++) {
 		addElement(addData[i]);
 	}
-	add = nullptr;
+	_add = nullptr;
 }
 
 Field::Field(std::string name) {
@@ -77,7 +77,7 @@ Field::Field(std::string name) {
 		}
 		file.close();
 	}
-	add = nullptr;
+	_add = nullptr;
 
 }
 
@@ -108,20 +108,20 @@ void Field::grow5P() {
 			first = true;
 
 		_grrP++;
-		add = new Pres[5 * _grrP];
+		_add = new Pres[5 * _grrP];
 		if (first) {
-			_headP = add;
-			_tailP = add;
+			_headP = _add;
+			_tailP = _add;
 		}
 		else {
 			int count = _tailP - _headP;
 			for (auto i = 0; i < _tailP - _headP; i++) {
-				*(add + i) = *(_headP + i);
+				*(_add + i) = *(_headP + i);
 				//delete (_headP + i);
 			}
 			delete[] _headP;
-			_headP = add;
-			_tailP = add + count;
+			_headP = _add;
+			_tailP = _add + count;
 		}
 	}
 }

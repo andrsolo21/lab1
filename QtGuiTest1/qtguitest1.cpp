@@ -524,7 +524,7 @@ void QtGuiTest1::doVisible5() {
 		ui.but7->setVisible(true);
 		ui.comboBoxCar->setVisible(true);
 		iDo5();
-		ui.but5->setText(QString::fromLocal8Bit("��������"));
+		ui.but5->setText(QString::fromLocal8Bit("change"));
 		disconnect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 		connect(ui.but2, SIGNAL(clicked()), this, SLOT(changeCar()));
 	}
@@ -542,7 +542,7 @@ void QtGuiTest1::doVisible6() {
 		ui.comboPress->setVisible(true);
 		ui.but8->setVisible(true);
 		iDo6();
-		ui.but3->setText(QString::fromLocal8Bit("��������"));
+		ui.but3->setText(QString::fromLocal8Bit("change"));
 		disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
 		connect(ui.but3, SIGNAL(clicked()), this, SLOT(changePres()));
 	}
@@ -568,7 +568,7 @@ void QtGuiTest1::iDo2() {
 	ui.gabXLine->clear();
 	ui.coordYLine->clear();
 	ui.gabYLine->clear();
-	ui.but2->setText(QString::fromLocal8Bit("��������"));
+	ui.but2->setText(QString::fromLocal8Bit("add"));
 	disconnect(ui.but2, SIGNAL(clicked()), this, SLOT(changeCar()));
 	connect(ui.but2, SIGNAL(clicked()), this, SLOT(setCar()));
 }
@@ -586,7 +586,7 @@ void QtGuiTest1::iDo3() {
 	ui.radiusPresLine->clear();
 	ui.coordPresX->clear();
 	ui.coordPresY->clear();
-	ui.but3->setText(QString::fromLocal8Bit("��������"));
+	ui.but3->setText(QString::fromLocal8Bit("add"));
 	disconnect(ui.but3, SIGNAL(clicked()), this, SLOT(changePres()));
 	connect(ui.but3, SIGNAL(clicked()), this, SLOT(setPres()));
 }
@@ -651,7 +651,8 @@ void QtGuiTest1::iDo6(int k) {
 		ui.but3->setEnabled(true);
 		ui.but4->setEnabled(true);
 		ui.but8->setEnabled(true);*/
-		int index = ui.comboPress->currentData().toInt();
+		//int index = ui.comboPress->currentData().toInt();
+		int index = k;
 		ui.namePresLine->setText(_motors->getPres(index).getName());
 		ui.radiusPresLine->setText(QString::number((_motors->getPres(index)).getR()));
 		ui.coordPresX->setText(QString::number((_motors->getPres(index)).getCoord(0)));

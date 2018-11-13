@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Car" Collapsed="true">
+    <Position X="1.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAUIGAARIQGEQgAAAAAoEAACAIAAABgACAEAAoBALY=</HashCode>
+      <FileName>car.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MotorShow" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQEAAACQIAkACABAAAAAABEgAAEAAAAEQAAFgCA=</HashCode>
+      <FileName>MotorShow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pres" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAMAABQAAAAAAAAAAAAAAAAAIgAAECACAEAAAAAQA=</HashCode>
+      <FileName>pres.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Field" Collapsed="true">
+    <Position X="6.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAADAABAAAyIAEAAAAAAAAAAAAEAAcFAAAAAAAHgCA=</HashCode>
+      <FileName>field.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
